@@ -13,6 +13,10 @@ class Usuario:
         else:
             print(f"{self.nombre} ya tiene a ese animal adoptado")
     def ActualizarContacto(self, nuevo_contacto):
-        self.contacto = nuevo_contacto
+        if nuevo_contacto != contacto:
+            self.contacto = nuevo_contacto
+            print("Se ha actualizado con éxito el contácto")
+        else:
+            print(f"{nuevo_contacto} es el contacto que tiene actualmente señor/a {self.nombre}")
     def SumarPuntos(self, cantidad):
         self.puntos_lealtad += cantidad
