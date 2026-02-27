@@ -16,5 +16,8 @@ class Cuidador:
     def HorasTrabajadas (self, horas):
         self.tiempo += horas
     def CambiarAnimal(self, animal):
-        self.animal = animal
-        self.tiempo = 0
+        if self.animal != animal:
+            self.animal = animal
+            self.tiempo = 0
+        else:
+            print(f"{self.animal}, ya está registrado como el animal bajo el cuidado de {self.nombre}")
