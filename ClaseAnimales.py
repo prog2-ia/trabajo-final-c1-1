@@ -1,13 +1,18 @@
 class Animales:
-    def __init__(self, nombre, edad, raza, necesidades, tiempo, comida, enfermedad, codigo):
+    def __init__(self, nombre, edad, especie, necesidades, tiempo, comida, enfermedad, codigo, refugio = None):
         self.nombre = nombre
         self.edad = edad
-        self.raza = raza
+        self.especie = especie
         self.necesidades = necesidades #Lista de necesidades (tratamientos y demás) que necesita el animal
         self.tiempo = tiempo #Tiempo que lleva en el refugio
         self.comida = comida #Comida que necesita el animal
         self.enfermedad = enfermedad #En caso de tener alguna, cuales son las enfermedades del animal (Lista)
         self.codigo = codigo #Para ser capaces de diferenciar a los animales por si dos tienen el mismo nombre
+
+        #En caso de que hayamos añadido al refugio al que pertenece el animal lo añade directamente a ese refugio
+
+        if refugio:
+            refugio.añadir_animal(self)
 
     def añadir_tiempo(self, tiempo):
         self.tiempo += tiempo
