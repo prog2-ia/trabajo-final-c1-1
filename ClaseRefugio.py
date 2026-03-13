@@ -12,5 +12,5 @@ class Refugio:
     def añadir_empleado(self, empleado):
         self.empleados.append(empleado)
     def mostrar_empleados(self):
-        for empleado in self.animales:
+        for empleado in self.empleados:
             print(f"{empleado.nombre} ({empleado.rol})")

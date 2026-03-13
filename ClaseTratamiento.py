@@ -1,6 +1,6 @@
 class Tratamiento:
     def __init__(self, tipo, utilidad):
-        self.tipo = tipo #El tipo de tratamiento que es
+        self.tipo = [] #El tipo de tratamiento que es
         self.tipo.append(tipo)
         self.utilidad = utilidad #Para que sirve ese tratamiento
 
