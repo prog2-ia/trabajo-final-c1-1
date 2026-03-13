@@ -1,12 +1,14 @@
-class Animales:
-    def __init__(self, nombre, edad, especie, necesidades, tiempo, comida, enfermedad, codigo, refugio = None):
+from abc import ABC, abstractmethod
+
+class Animales(ABC):
+    def __init__(self, nombre, edad, especie, tiempo, codigo, refugio = None):
         self.nombre = nombre
         self.edad = edad
         self.especie = especie
-        self.necesidades = necesidades #Lista de necesidades (tratamientos y demás) que necesita el animal
+        self.comida = ''
+        self.necesidades = [] #Lista de necesidades (tratamientos y demás) que necesita el animal, se rellena al hacer la inspeción del animal
         self.tiempo = tiempo #Tiempo que lleva en el refugio
-        self.comida = comida #Comida que necesita el animal
-        self.enfermedad = enfermedad #En caso de tener alguna, cuales son las enfermedades del animal (Lista)
+        self.enfermedad = [] #En caso de tener alguna, cuales son las enfermedades del animal (Lista), se rellena al hacer la inspeción del animal
         self.codigo = codigo #Para ser capaces de diferenciar a los animales por si dos tienen el mismo nombre
 
         #En caso de que hayamos añadido al refugio al que pertenece el animal lo añade directamente a ese refugio
@@ -50,5 +52,10 @@ class Animales:
 
     def adoptados(self):
         #Tenemos que hacer que se eliminen los animales del refugio cuando se adopten
+
+
+    @abstractmethod
+    def inspeccion(self):
+        pass
 
 
