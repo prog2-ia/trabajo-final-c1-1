@@ -29,3 +29,19 @@ class Empleado:
     def HorasTrabajadas(self, horas):
         self.tiempo += horas
         print(f"{self.nombre} ha registrado {horas} horas nuevas. Total: {self.tiempo}")
+
+    def __str__(self): #definimos el str, para que muestre el nombre y el DNI del epmleado
+        return f"Empleado: {self.nombre} | DNI: {self.dni}"
+
+    def __len__(self): #implementacioçon del método len
+        return f"Lleva trabajando: {self.tiempo} años"
+
+    def __eq__(self, otro):
+        # Primero comprobamos si el 'otro' objeto es de la misma clase
+        if not isinstance(otro, Empleado):
+            return False
+
+        return self.__dni == otro.__dni
+
+    def __repr__(self): #Implementación del método repr
+        return f"Empleado(nombre='{self.nombre}', dni='{self.dni}')"

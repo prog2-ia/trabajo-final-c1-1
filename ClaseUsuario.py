@@ -21,3 +21,16 @@ class Usuario:
             print(f"{nuevo_contacto} es el contacto que tiene actualmente señor/a {self.nombre}")
     def SumarPuntos(self, cantidad):
         self.puntos_lealtad += cantidad
+
+    def __str__(self):
+        return f"Usuario: {self.nombre}"
+
+    def __eq__(self, otro):
+        if not isinstance(otro, Usuario):
+            return False
+
+        return self.dni == otro.dni
+
+    def __bool__(self):
+        # Un usuario normal siempre se considera "activo" o válido
+        return True

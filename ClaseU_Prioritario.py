@@ -27,3 +27,9 @@ class Socio(Usuario):
         if self.membresia_activa:
             return precio_veterinario * 0.8
         return precio_veterinario
+
+    def __bool__(self): #definimos el metodo __bool__
+        self.comprobar_socio()
+
+        # dependiendo de si la mebresía está activa o no, te dirá si es un usario prioritario o no
+        return self.membresia_activa
