@@ -1,5 +1,5 @@
 class Refugio:
-    def __init__(self, direccion, tamaño, animal, empleados):
+    def __init__(self, direccion, tamaño):
         self.direccion = direccion
         self.tamaño = tamaño
         self.animales = []
