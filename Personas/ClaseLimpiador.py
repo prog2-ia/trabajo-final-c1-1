@@ -1,4 +1,4 @@
-from ClaseEmpleado import Empleado
+from Personas.ClaseEmpleado import Empleado
 class Limpiador(Empleado):
     def __init__(self, nombre, edad, genero, dni, tiempo, salario, refugio=None):
         super().__init__(nombre, edad, genero, dni, tiempo, refugio)

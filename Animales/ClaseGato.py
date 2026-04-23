@@ -1,13 +1,13 @@
-from ClaseAnimales import Animales
+from Animales.ClaseAnimales import Animales
 
 class Gato(Animales):
-    def __init__(self, nombre, edad, tiempo, codigo, raza, refugio = None):
+    def __init__(self, nombre, edad, codigo, raza, refugio = None):
 
-        super().__init__(nombre, edad, 'gato', tiempo, codigo, refugio)
+        super().__init__(nombre, edad, 'gato', codigo, refugio)
         self.raza = raza
 
     def caracteristicas(self, caract):
-        print(f'Este perro de la raza {self.raza} tiene estas características: {caract}')
+        print(f'La raza de este gato es: {self.raza}, y tiene estas características: {caract}')
 
     def inspeccion(self):
         comida = input('¿Que comida requiere este gato? ')

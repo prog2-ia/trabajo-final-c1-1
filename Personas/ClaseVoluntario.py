@@ -1,5 +1,5 @@
 from ClaseUsuario import Usuario
-from ClaseEmpleado import Empleado
+from Personas.ClaseEmpleado import Empleado
 
 
 class Voluntario(Usuario, Empleado):

@@ -1,9 +1,9 @@
-from ClaseAnimales import Animales
+from Animales.ClaseAnimales import Animales
 
 class Perro(Animales):
-    def __init__(self, nombre, edad, tiempo, codigo, raza, refugio = None): #Añadir que dependiendo de la raza tenga unas condiciones especificas u otras
+    def __init__(self, nombre, edad, codigo, raza, refugio = None): #Añadir que dependiendo de la raza tenga unas condiciones especificas u otras
 
-        super().__init__(nombre, edad, 'perro', tiempo, codigo, refugio)
+        super().__init__(nombre, edad, 'perro', codigo, refugio)
         self.raza = raza
 
     def caracteristicas(self, caract):
