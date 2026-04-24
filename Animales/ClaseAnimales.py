@@ -7,14 +7,22 @@ class Animales(ABC):
         self.nombre = nombre
         self.edad = edad
         self.especie = especie
+        self.necesidades = [] #Para cuando pase la inspección del veterinario
         self.comida = None
         self.tiempo = 0
-        self.__codigo = codigo #Codigo privado
+        self.__codigo = codigo #Código privado
 
         Animales.total_animales += 1
 
         if refugio:
             refugio.añadir_animal(self)
+
+    def __str__(self): #En caso de que alguien haga print(Nombre_Perro)
+        return f'Código: {self.codigo}. Nombre: {self.nombre}. Especie: {self.especie}'
+
+    def __iadd__(self, nueva_necesidad): #Permite hacer: animal += necesidad
+        self.necesidades.append(nueva_necesidad)
+        return self
 
     @property
     def codigo(self):
@@ -22,44 +30,11 @@ class Animales(ABC):
 
     @classmethod
     def mostrar_censo(cls):
-        return f"Total histórico de animales registrados: {cls.total_animales}"
+        return f'Total histórico de animales registrados: {cls.total_animales}'
 
     def añadir_tiempo(self, tiempo):
         self.tiempo += tiempo
 
-    def curar(self, enfermedad):
-    # Para comprobar si la enfermedad de la que se ha curado el animal la sufria
-        sufre = False
-        for enf in self.enfermedad:
-            if enf == enfermedad:
-                self.enfermedad.remove(enfermedad)
-                sufre = True
-
-
-        if sufre == True:
-            print(f'{self.nombre} se ha curado de {enfermedad}')
-
-        else:
-            print(f'{self.nombre} no sufre de {enfermedad}')
-
-
-    def enfermar(self, enfermedad):
-    #Para comprobar que no se introduzca dos veces la misma enfermedad
-        sufre = False
-        for enf in self.enfermedad:
-            if enf == enfermedad:
-                sufre = True
-
-        if sufre == False:
-            self.enfermedad.append(enfermedad)
-            print(f'{self.nombre} ahora sufre de {enfermedad}')
-
-        else:
-            print(f'{self.nombre} ya tiene {enfermedad}')
-
-
     @abstractmethod
-    def inspeccion(self):
+    def inspeccion(self, comida, nueva_necesidad = None):
         pass
-
-
