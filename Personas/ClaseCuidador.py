@@ -12,9 +12,17 @@ class Cuidador(Empleado):
             self.seguimiento_animales[animal] = 0
 
         self.seguimiento_animales[animal] += horas
-        print(f"Horas acumuladas con {animal.nombre}: {self.seguimiento_animales[animal]}")
 
         if self.seguimiento_animales[animal] >= 150:
             if animal.especie not in self.lista_experto:
                 self.lista_experto.append(animal.especie)
-                print(f"Enhorabuena {self.nombre}, ahora eres experto en la raza: {animal.especie}")
+                return f"Enhorabuena {self.nombre}, ahora eres experto en la especie: {animal.especie}"
+
+        return f"Horas acumuládas con {animal.nombre}: {self.seguimiento_animales[animal]}"
+
+    def __getitem__(self, indice):
+        """
+        Permite acceder a la lista de especies expertas usando corchetes.
+        Ejemplo: cuidador[0] -> devuelve la primera especie de la lista_experto.
+        """
+        return self.lista_experto[indice]

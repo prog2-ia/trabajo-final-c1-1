@@ -7,20 +7,22 @@ class Usuario:
         self.animales_adoptados = []
         self.genero = genero
         self.puntos_lealtad = 0 #son puntos que se acumulan para un sistema de beneficios y de la posibilidad de adopción
-    def RegistrarAdopcion(self, animal):
+    def registrar_adopcion(self, animal):
         if animal not in self.animales_adoptados:
             self.animales_adoptados.append(animal)
-            print(f"Registro exitoso: {self.nombre} ha adoptado a {animal}.")
+            return f"Registro exitoso: {self.nombre} ha adoptado a {animal}."
         else:
-            print(f"{self.nombre} ya tiene a ese animal adoptado")
-    def ActualizarContacto(self, nuevo_contacto):
+            return f"{self.nombre} ya tiene a ese animal adoptado"
+    def actualizar_contacto(self, nuevo_contacto):
         if nuevo_contacto != self.contacto:
             self.contacto = nuevo_contacto
-            print("Se ha actualizado con éxito el contácto")
+            return "Se ha actualizado con éxito el contácto"
         else:
-            print(f"{nuevo_contacto} es el contacto que tiene actualmente señor/a {self.nombre}")
-    def SumarPuntos(self, cantidad):
+            return f"{nuevo_contacto} es el contacto que tiene actualmente señor/a {self.nombre}"
+
+    def __iadd__(self, cantidad):
         self.puntos_lealtad += cantidad
+        return self
 
     def __str__(self):
         return f"Usuario: {self.nombre}"
@@ -34,3 +36,7 @@ class Usuario:
     def __bool__(self):
         # Un usuario normal siempre se considera "activo" o válido
         return True
+
+    def __getitem__(self, indice):
+        # Permite acceder a los animales adoptados usando corchetes: usuario[0]
+        return self.animales_adoptados[indice]

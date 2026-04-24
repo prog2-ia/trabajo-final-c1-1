@@ -8,4 +8,4 @@ class Limpiador(Empleado):
         self.HorasTrabajadas(horas)
         if self.tiempo // 4200 > (self.tiempo - horas) // 4200:
             self.salario *= 1.10
-            print(f"¡Aumento de sueldo para {self.nombre}! Nuevo salario: {self.salario}")
+            return f"¡Aumento de sueldo para {self.nombre}! Nuevo salario: {self.salario}"
