@@ -15,9 +15,10 @@ class Voluntario(Usuario, Empleado):
     def trabajar(self, horas, tarea="ayuda general"):
         self.HorasTrabajadas(horas)
         puntos_ganados = horas // 10
-        self.SumarPuntos(puntos_ganados)
-        print(f"Voluntario {self.nombre} realizó: {tarea}. Ganó {puntos_ganados} puntos de lealtad.")
+        #usamos la sobrecarga del operador +=
+        self += puntos_ganados
+        return f"Voluntario {self.nombre} realizó: {tarea}. Ganó {puntos_ganados} puntos de lealtad."
 
     def realizar_mision(self):
         self.misiones_completadas += 1
-        print(f"Misión finalizada. Total: {self.misiones_completadas}")
+        return f"Misión finalizada. Total: {self.misiones_completadas}"
