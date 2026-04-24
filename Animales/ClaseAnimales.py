@@ -3,16 +3,19 @@ from abc import ABC, abstractmethod
 class Animales(ABC):
     total_animales = 0 #Lista para saber la cantidad de animales que llevamos creados
 
-    def __init__(self, nombre, edad, especie, codigo, refugio = None):
+    def __init__(self, nombre, edad, especie, refugio = None):
+        Animales.total_animales += 1
+
         self.nombre = nombre
         self.edad = edad
         self.especie = especie
         self.necesidades = [] #Para cuando pase la inspección del veterinario
         self.comida = None
         self.tiempo = 0
-        self.__codigo = codigo #Código privado
 
-        Animales.total_animales += 1
+        letra = self.especie[0].upper
+        self.__codigo = f'{letra}{Animales.total_animales}' #Código privado
+
 
         if refugio:
             refugio.añadir_animal(self)
@@ -36,5 +39,5 @@ class Animales(ABC):
         self.tiempo += tiempo
 
     @abstractmethod
-    def inspeccion(self, comida, nueva_necesidad = None):
+    def inspeccion(self, comida):
         pass
