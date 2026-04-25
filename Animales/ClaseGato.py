@@ -31,4 +31,3 @@ class Gato(Animales):
 
         else:
             informe += f'El gato no tiene ninguna patología\n'
-
