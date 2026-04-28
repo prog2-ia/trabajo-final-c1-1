@@ -1,4 +1,5 @@
 from Animales.ClaseAnimales import Animales
+from Animales.ClaseNecesidad import Necesidad
 
 class Gato(Animales):
     def __init__(self, nombre, edad, raza, refugio = None):
