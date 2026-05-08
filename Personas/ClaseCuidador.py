@@ -21,8 +21,5 @@ class Cuidador(Empleado):
         return f"Horas acumuládas con {animal.nombre}: {self.seguimiento_animales[animal]}"
 
     def __getitem__(self, indice):
-        """
-        Permite acceder a la lista de especies expertas usando corchetes.
-        Ejemplo: cuidador[0] -> devuelve la primera especie de la lista_experto.
-        """
+        # Permite acceder a la lista de especies expertas usando corchetes.
         return self.lista_experto[indice]

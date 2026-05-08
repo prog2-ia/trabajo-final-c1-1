@@ -20,7 +20,7 @@ class Empleado:
         if len(str(nuevo_dni)) == 9:
             self.__dni = nuevo_dni
         else:
-            print("Error: El DNI debe tener 9 caracteres.")
+            return f"Error: El DNI debe tener 9 caracteres."
 
     @abstractmethod
     def trabajar(self):
