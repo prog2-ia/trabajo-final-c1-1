@@ -2,25 +2,25 @@ from ClaseRefugio import *
 from Animales.ClaseAnimales import *
 from Animales.ClaseGato import *
 from Animales.ClasePerro import *
-from Animales.ClaseNecesidad import *
 
 
 def seleccionar_refugio(): #Para siempre que haya que seleccionar un refugio y mostrar todos sus nombres
     for refugio in mis_refugios:
         print(refugio)
 
-    refu = input('¿A que refugio quieres añadirlo?: ')
     refugio_seleccionado = None
 
-    for refugio in mis_refugios:
-        if refugio.nombre.lower() == refu.lower():
-            refugio_seleccionado = refugio
+    while refugio_seleccionado == None:
+        refu = input('¿A que refugio quieres añadirlo?: ')
+        for refugio in mis_refugios:
+            if refugio.nombre.lower() == refu.lower():
+                refugio_seleccionado = refugio
 
-    if refugio_seleccionado == None:
-        print('Este refugio no está en tú lista de refugios\n')
+        if refugio_seleccionado == None:
+            print('Este refugio no está en tú lista de refugios\n')
 
-    else:
-        print(f'El refugio seleccionado es: {refugio_seleccionado.nombre}')
+        else:
+            print(f'El refugio seleccionado es: {refugio_seleccionado.nombre}')
 
     return refugio_seleccionado
 
@@ -77,10 +77,36 @@ def animales():
             for animal in refugio_seleccionado.animales:
                 print(f'{animal.codigo}: {animal.nombre}, {animal.especie}')
 
-            seleccion_codigo = input('Seleccione el código de un animal: ')
+            elegido = False
+            while not elegido:
+                seleccion_codigo = input('Seleccione el código de un animal: ')
+                for animal in refugio_seleccionado.animales:
+                    if seleccion_codigo == animal.codigo:
+                        elegido = True
+                        nombre_final = animal
 
-            #Falta hacer que se seleccione el código del animal y se pase la inspección de ese animal
+                if not elegido:
+                    print('El animal seleccionado no está en el refugio elegido')
 
+            comida = input('¿Que comida debe tomar el animal? ')
+
+            if nombre_final.especie == 'Gato':
+                #Falta hacer que te deje poner que no está enfermo
+                #Que muestre mejor el informe
+
+                estado_garras = input('¿En que estado se encuentran las garras del gato: ')
+                enfermedad = input('¿Tiene alguna enfermedad? ')
+                cura = input('¿Cual es la cura de la enfermedad? ')
+
+                informe = nombre_final.inspeccion(comida, estado_garras, enfermedad, cura)
+
+            elif nombre_final.especie == 'Perro':
+                pass
+
+
+
+
+            print(informe)
 
 
         elif seleccion == 5:  #Volver para atrás

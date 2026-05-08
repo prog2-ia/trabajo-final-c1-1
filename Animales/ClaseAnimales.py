@@ -14,8 +14,7 @@ class Animales(ABC):
         self.tiempo = 0
 
         letra = self.especie[0].upper
-        self.__codigo = f'{letra}{Animales.total_animales}' #Código privado
-
+        self.codigo = f'{letra}{Animales.total_animales}'
 
         if refugio:
             refugio.añadir_animal(self)
@@ -27,9 +26,6 @@ class Animales(ABC):
         self.necesidades.append(nueva_necesidad)
         return self
 
-    @property
-    def codigo(self):
-        return self.__codigo
 
     @classmethod
     def mostrar_censo(cls):
