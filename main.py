@@ -11,7 +11,7 @@ def seleccionar_refugio(): #Para siempre que haya que seleccionar un refugio y m
     refugio_seleccionado = None
 
     while refugio_seleccionado == None:
-        refu = input('¿A que refugio quieres añadirlo?: ')
+        refu = input('¿Que refugio elijes?: ')
         for refugio in mis_refugios:
             if refugio.nombre.lower() == refu.lower():
                 refugio_seleccionado = refugio
@@ -57,7 +57,14 @@ def animales():
             else:
                 print('Ahora introduzca los datos del gato:')
                 nombre = input('Nombre: ')
-                edad = int(input('Edad: '))
+                entrada = ''
+                while not entrada.isdigit():
+                    entrada = input('Edad: ')
+                    if entrada.isdigit():
+                        edad = int(entrada)
+                    else:
+                        print('Debe introducir un número')
+
                 raza = input('Raza: ')
 
                 Gato(nombre, edad, raza, refugio_seleccionado)
