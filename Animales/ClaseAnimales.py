@@ -12,8 +12,15 @@ class Animales(ABC):
         self.necesidades = [] #Para cuando pase la inspección del veterinario
         self.comida = None
         self.tiempo = 0
+        self.informe = 'No hay informe generado hasta que se realice la inspección'
 
-        letra = self.especie[0].upper
+        if especie == 'gato':
+            letra = 'G'
+        elif especie == 'perro':
+            letra = 'P'
+        else:
+            letra = '_'
+
         self.codigo = f'{letra}{Animales.total_animales}'
 
         if refugio:

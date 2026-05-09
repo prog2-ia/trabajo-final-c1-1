@@ -3,7 +3,7 @@ from Animales.ClaseAnimales import Animales
 class Gato(Animales):
     def __init__(self, nombre, edad, raza, refugio = None):
 
-        super().__init__(nombre, edad, 'Gato', refugio)
+        super().__init__(nombre, edad, 'gato', refugio)
         self.raza = raza
         self.patologia = []
 
@@ -17,7 +17,7 @@ class Gato(Animales):
             dic_pat = {'enfermedad': enfermedad, 'cura': cura}
             self.patologia.append(dic_pat)
 
-        informe = f'===== INFORME VETERINARIO ====='
+        informe = f'===== INFORME VETERINARIO =====\n'
         informe += f'Paciente: {self.nombre} | Código: {self.codigo}\n'
         informe += f'Raza del gato: {self.raza}\n '
         informe += f'Edad: {self.edad} | Tiempo en el refugio: {self.tiempo}\n'
@@ -38,6 +38,6 @@ class Gato(Animales):
 
         else:
             for pat in self.patologia:
-                informe += f'El animal tiene {pat['enfermedad']} y se cura con {pat['cura']}'
+                informe += f'El animal tiene {pat['enfermedad']} y se cura con {pat['cura']}\n'
 
-        return informe
+        self.informe = informe
