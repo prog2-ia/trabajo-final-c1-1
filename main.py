@@ -1,7 +1,11 @@
 from ClaseRefugio import *
-from Animales.ClaseAnimales import *
 from Animales.ClaseGato import *
 from Animales.ClasePerro import *
+from Personas.ClaseUsuario import *
+from Personas.ClaseCuidador import *
+from Personas.ClaseEmpleado import *
+from Personas.ClaseLimpiador import *
+from Personas.ClaseU_Prioritario import *
 
 
 def seleccionar_refugio(): #Para siempre que haya que seleccionar un refugio y mostrar todos sus nombres
