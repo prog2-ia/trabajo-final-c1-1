@@ -18,8 +18,10 @@ class Animales(ABC):
             letra = 'G'
         elif especie == 'perro':
             letra = 'P'
+        elif especie == 'caballo':
+            letra = 'C'
         else:
-            letra = '_'
+            letra = '?'
 
         self.codigo = f'{letra}{Animales.total_animales}'
 
@@ -32,7 +34,6 @@ class Animales(ABC):
     def __iadd__(self, nueva_necesidad): #Permite hacer: animal += necesidad
         self.necesidades.append(nueva_necesidad)
         return self
-
 
     @classmethod
     def mostrar_censo(cls):

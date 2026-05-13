@@ -13,7 +13,7 @@ class Refugio:
 
     def mostrar_animales(self):
         for animal in self.animales:
-            print(f"{animal.nombre} ({animal.especie})")
+            print(animal)
 
     def añadir_empleado(self, empleado):
         self.empleados.append(empleado)
@@ -21,3 +21,11 @@ class Refugio:
     def mostrar_empleados(self):
         for empleado in self.empleados:
             print(f"{empleado.nombre} ({empleado.rol})")
+
+    def adoptar(self, codigo):
+        for animal in self.animales:
+            if animal.codigo == codigo:
+                self.animales.remove(animal)
+                return True
+
+        return False

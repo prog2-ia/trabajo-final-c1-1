@@ -1,4 +1,4 @@
-from ClaseUsuario import Usuario
+from Personas.ClaseUsuario import Usuario
 from Personas.ClaseEmpleado import Empleado
 
 

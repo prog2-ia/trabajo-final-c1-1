@@ -1,4 +1,5 @@
 from Personas.ClaseUsuario import Usuario
+
 class Socio(Usuario):
     def __init__(self, nombre, dni, contacto, residencia, genero, cuota, prioridad):
         super().__init__(nombre, dni, contacto, residencia, genero)

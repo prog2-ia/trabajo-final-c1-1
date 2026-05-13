@@ -3,7 +3,6 @@ from Animales.ClaseGato import *
 from Animales.ClasePerro import *
 from Personas.ClaseUsuario import *
 from Personas.ClaseCuidador import *
-from Personas.ClaseEmpleado import *
 from Personas.ClaseLimpiador import *
 from Personas.ClaseU_Prioritario import *
 
@@ -39,14 +38,15 @@ def animales():
         print('2: Añadir un nuevo Gato')
         print('3: Buscar animales por código')
         print('4: Pasar la inspección de un animal') #Clase abstracta
-        print('5: Volver al inicio')
+        print('5: Adopción de animal')
+        print('6: Volver al inicio')
 
-        seleccion = int(input('Elija un apartado (1/2/3/4/5): '))
+        seleccion = int(input('Elija un apartado (1/2/3/4/5/6): '))
         print()
 
         while seleccion < 1 or seleccion > 5:  # Obliga a seleccionar bien
             print('Elija un valor válido')
-            seleccion = int(input('Elija un apartado (1/2/3/4/5): '))
+            seleccion = int(input('Elija un apartado (1/2/3/4/5/6): '))
 
 
         if seleccion == 1:  # Añadir perro
@@ -104,8 +104,7 @@ def animales():
                 print('No hay animales en este refugio por el momento\n')
 
             else:
-                for animal in refugio_seleccionado.animales:
-                    print(animal)
+                refugio_seleccionado.mostrar_animales()
 
             elegido = False
             while not elegido:
@@ -129,8 +128,7 @@ def animales():
             refugio_seleccionado = seleccionar_refugio()
             print('De que animal vamos a pasar la inspección?')
 
-            for animal in refugio_seleccionado.animales:
-                print(animal)
+            refugio_seleccionado.mostrar_animales()
 
             elegido = False
             while not elegido:
@@ -168,7 +166,27 @@ def animales():
             print(informe)
 
 
-        elif seleccion == 5:  #Volver para atrás
+        elif seleccion == 5:  #Animal adoptado
+            print('--- TRÁMITE DE ADOPCIÓN ---')
+            refugio_seleccionado = seleccionar_refugio()
+
+            if len(refugio_seleccionado.animales) == 0:
+                print('No hay animales en este refugio.\n')
+
+            else:
+                refugio_seleccionado.mostrar_animales()
+                codigo = input('Introduce el código del animal a adoptar: ')
+
+                exito = refugio_seleccionado.adoptar(codigo)
+
+                if exito:
+                    print(f'¡Felicidades! el animal con código {codigo} ha sido adoptado')
+
+                else:
+                    print(f'Error: No existe ningún animal con código {codigo} en el refugio {refugio_seleccionado.nombre}')
+
+
+        elif seleccion == 6:  #Volver para atrás
             seguir = False
 
 
@@ -214,7 +232,7 @@ def refugios(mis_refugios):
         elif seleccion == 3:  # Volver para atrás
             seguir = False
 
-        return mis_refugios
+    return mis_refugios
 
 
 
