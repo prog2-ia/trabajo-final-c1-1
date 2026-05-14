@@ -1,6 +1,7 @@
 from ClaseRefugio import *
 from Animales.ClaseGato import *
 from Animales.ClasePerro import *
+from Animales.ClaseCaballo import *
 from Personas.ClaseUsuario import *
 from Personas.ClaseCuidador import *
 from Personas.ClaseLimpiador import *
@@ -29,75 +30,112 @@ def seleccionar_refugio(): #Para siempre que haya que seleccionar un refugio y m
 
 
 
+def añadir_animal(): #Elección 2 en la función animales
+    seleccion = int(input('Elija un animal a añadir: '))
+
+    if seleccion == 1:  # Añadir perro
+        print('\n--- AÑADIR PERRO A UN REFUGIO ---')
+        print('Puedes añadir el perro a los siguientes refugios:')
+        refugio_seleccionado = seleccionar_refugio()
+
+        if len(refugio_seleccionado.animales) >= refugio_seleccionado.tamaño:
+            print('Este refugio ya está lleno\n')
+
+        else:
+            print('Ahora introduzca los datos del perro:')
+            nombre = input('Nombre: ')
+            entrada = ''
+            while not entrada.isdigit():
+                entrada = input('Edad: ')
+                if entrada.isdigit():
+                    edad = int(entrada)
+                else:
+                    print('Debe introducir un número')
+
+            raza = input('Raza: ')
+
+            Perro(nombre, edad, raza, refugio_seleccionado)
+            print('Se ha introducido correctamente al perro en la base de datos\n')
+
+    elif seleccion == 2:
+        print('--- AÑADIR GATO A UN REFUGIO ---\n')
+        print('Puedes añadir el gato a los siguientes refugios:')
+        refugio_seleccionado = seleccionar_refugio()
+
+        if len(refugio_seleccionado.animales) >= refugio_seleccionado.tamaño:
+            print('Este refugio ya está lleno\n')
+
+        else:
+            print('Ahora introduzca los datos del gato:')
+            nombre = input('Nombre: ')
+            entrada = ''
+            while not entrada.isdigit():
+                entrada = input('Edad: ')
+                if entrada.isdigit():
+                    edad = int(entrada)
+                else:
+                    print('Debe introducir un número')
+
+            raza = input('Raza: ')
+
+            Gato(nombre, edad, raza, refugio_seleccionado)
+            print('Se ha introducido correctamente al gato en la base de datos\n')
+
+    elif seleccion == 3:
+        print('--- AÑADIR CABALLO A UN REFUGIO ---\n')
+        print('Puedes añadir el caballo a los siguientes refugios:')
+        refugio_seleccionado = seleccionar_refugio()
+
+        if len(refugio_seleccionado.animales) >= refugio_seleccionado.tamaño:
+            print('Este refugio ya está lleno\n')
+
+        else:
+            print('Ahora introduzca los datos del caballo:')
+            nombre = input('Nombre: ')
+            entrada = ''
+            while not entrada.isdigit():
+                entrada = input('Edad: ')
+                if entrada.isdigit():
+                    edad = int(entrada)
+                else:
+                    print('Debe introducir un número')
+
+            raza = input('Raza: ')
+
+            Caballo(nombre, edad, raza, refugio_seleccionado)
+            print('Se ha introducido correctamente al caballo en la base de datos\n')
+
+
+
 def animales():
 
     seguir = True
     while seguir:
         print('Bienvenido al apartado animales, estas son las opciones:')
-        print('1: Añadir un nuevo Perro')
-        print('2: Añadir un nuevo Gato')
-        print('3: Buscar animales por código')
-        print('4: Pasar la inspección de un animal') #Clase abstracta
-        print('5: Adopción de animal')
-        print('6: Volver al inicio')
+        print('1: Añadir un nuevo Animal')
+        print('2: Buscar animales por código')
+        print('3: Pasar la inspección de un animal') #Clase abstracta
+        print('4: Adopción de animal')
+        print('5: Volver al inicio')
 
-        seleccion = int(input('Elija un apartado (1/2/3/4/5/6): '))
+        seleccion = int(input('Elija un apartado (1/2/3/4/5): '))
         print()
 
         while seleccion < 1 or seleccion > 5:  # Obliga a seleccionar bien
             print('Elija un valor válido')
-            seleccion = int(input('Elija un apartado (1/2/3/4/5/6): '))
+            seleccion = int(input('Elija un apartado (1/2/3/4/5): '))
 
 
-        if seleccion == 1:  # Añadir perro
-            print('Puedes añadir el perro a los siguientes refugios:')
-            refugio_seleccionado = seleccionar_refugio()
+        if seleccion == 1:  # Añadir animal
+            print('Puedes añadir uno de los siguientes animales: ')
+            print('1: Perro')
+            print('2: Gato')
+            print('3: Caballo')
 
-            if len(refugio_seleccionado.animales) >= refugio_seleccionado.tamaño:
-                print('Este refugio ya está lleno\n')
-
-            else:
-                print('Ahora introduzca los datos del perro:')
-                nombre = input('Nombre: ')
-                entrada = ''
-                while not entrada.isdigit():
-                    entrada = input('Edad: ')
-                    if entrada.isdigit():
-                        edad = int(entrada)
-                    else:
-                        print('Debe introducir un número')
-
-                raza = input('Raza: ')
-
-                Perro(nombre, edad, raza, refugio_seleccionado)
-                print('Se ha introducido correctamente al perro en la base de datos\n')
+            añadir_animal()
 
 
-        elif seleccion == 2:  # Añadir gato
-            print('Puedes añadir el gato a los siguientes refugios:')
-            refugio_seleccionado = seleccionar_refugio()
-
-            if len(refugio_seleccionado.animales) >= refugio_seleccionado.tamaño:
-                print('Este refugio ya está lleno\n')
-
-            else:
-                print('Ahora introduzca los datos del gato:')
-                nombre = input('Nombre: ')
-                entrada = ''
-                while not entrada.isdigit():
-                    entrada = input('Edad: ')
-                    if entrada.isdigit():
-                        edad = int(entrada)
-                    else:
-                        print('Debe introducir un número')
-
-                raza = input('Raza: ')
-
-                Gato(nombre, edad, raza, refugio_seleccionado)
-                print('Se ha introducido correctamente al gato en la base de datos\n')
-
-
-        elif seleccion == 3:  # Ver todos los animales
+        elif seleccion == 2:  # Ver todos los animales
             print('¿En que refugio se encuentra el animal que buscas?: ')
             refugio_seleccionado = seleccionar_refugio()
             if len(refugio_seleccionado.animales) == 0:
@@ -121,7 +159,7 @@ def animales():
             print(f'{nombre_final.informe}\n')
 
 
-        elif seleccion == 4:  # Llamar a la función necesidad e inspección
+        elif seleccion == 3:  # Llamar a la función necesidad e inspección
             print('Vamos a pasar una inspección')
             print('De que refugio?')
 
@@ -154,8 +192,8 @@ def animales():
                     informe = nombre_final.inspeccion(comida, estado_garras)
 
             elif nombre_final.especie == 'perro':
-                estado_dientes = input('¿En que estado se encuentran las garras del gato?: ')
-                enfermo = input('¿El gato está enfermo? (s/n) ')
+                estado_dientes = input('¿En que estado se encuentran los dientes del perro?: ')
+                enfermo = input('¿El perro está enfermo? (s/n) ')
                 if enfermo == 's':
                     enfermedad = input('¿Que enfermedad padece? ')
                     cura = input('¿Cual es la cura de la enfermedad? ')
@@ -164,9 +202,10 @@ def animales():
                     informe = nombre_final.inspeccion(comida, estado_dientes)
 
             print(informe)
+            input('Pulse [Enter] para continuar')
 
 
-        elif seleccion == 5:  #Animal adoptado
+        elif seleccion == 4:  #Animal adoptado
             print('--- TRÁMITE DE ADOPCIÓN ---')
             refugio_seleccionado = seleccionar_refugio()
 
@@ -186,7 +225,7 @@ def animales():
                     print(f'Error: No existe ningún animal con código {codigo} en el refugio {refugio_seleccionado.nombre}')
 
 
-        elif seleccion == 6:  #Volver para atrás
+        elif seleccion == 5:  #Volver para atrás
             seguir = False
 
 
@@ -207,25 +246,28 @@ def refugios(mis_refugios):
             seleccion = int(input('Elija un apartado (1/2/3): '))
 
 
-        if seleccion == 1:  # Mirar los refugios que tiene
+        if seleccion == 1:# Mirar los refugios que tiene
+            print('--- REFUGIOS ACTUALES ---\n')
             for refugio in mis_refugios:
-                if len(refugio.animales) == refugio.capacidad:
-                    print(f'El refugio {refugio.nombre} está al máximo de su capacidad, deberá crear otro refugio para seguir acogiendo animales')
+                if len(refugio.animales) == refugio.tamaño:
+                    print(f'{refugio.nombre.upper()}: Está al máximo de su capacidad, deberá crear otro refugio para seguir acogiendo animales')
 
                 elif len(refugio.animales) == 0:
-                    print(f'El refugio {refugio.nombre} no tiene ningún animal todavía')
+                    print(f'{refugio.nombre.upper()}: No tiene ningún animal todavía')
 
                 else:
-                    print (f'El refugio {refugio.nombre} ahora mismo tiene {refugio.animales} en el, por lo que caben {len(refugio.animales) - refugio.capacidad}')
+                    print (f'{refugio.nombre.upper()}: Ahora mismo tiene {refugio.animales} en el, por lo que caben {len(refugio.animales) - refugio.tamaño} animales más')
+
+                print()
 
 
         elif seleccion == 2:  # Añadir un refugio
             print('Vamos a añadir un nuevo refugio: ')
             nombre = input('Nombre del refugio: ').lower()
-            capacidad = int(input('Espacio máximo del refugio: '))
+            tamaño = int(input('Espacio máximo del refugio: '))
             print()
 
-            mi_refugio = Refugio(nombre, capacidad)
+            mi_refugio = Refugio(nombre, tamaño)
             mis_refugios.append(mi_refugio)
 
 
@@ -236,6 +278,16 @@ def refugios(mis_refugios):
 
 
 
+def trabajadores():
+    pass
+
+
+
+def clientes():
+    pass
+
+
+
 if __name__ == '__main__':
     ejecutando = True
     while ejecutando:
@@ -243,10 +295,10 @@ if __name__ == '__main__':
         mis_refugios = []
         print('Bienvenido al sistema, primero introduzca los datos necesaríos')
         nombre = input('Nombre del refugio: ').lower()
-        capacidad = int(input('Espacio máximo del refugio: '))
+        tamaño = int(input('Espacio máximo del refugio: '))
         print()
 
-        mi_refugio = Refugio(nombre, capacidad)
+        mi_refugio = Refugio(nombre, tamaño)
         mis_refugios.append(mi_refugio)
 
         inicio = True
@@ -255,6 +307,7 @@ if __name__ == '__main__':
             print('-' * 50)
             print('Base de datos del refugio de animales')
             print('-' * 50)
+            print()
             print('Deberá seleccionar uno de los siguientes apartados:')
             print('1: Apartado Animales')
             print('2: Apartado Trabajadores')
@@ -270,10 +323,10 @@ if __name__ == '__main__':
                 animales()
 
             elif seleccion == 2: #Apartado Trabajadores
-                pass
+                trabajadores()
 
             elif seleccion == 3: #Apartado Clientes
-                pass
+                clientes()
 
             elif seleccion == 4: #Apartado Refugios
                 mis_refugios = refugios(mis_refugios)

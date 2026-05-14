@@ -5,6 +5,7 @@ class Perro(Animales):
 
         super().__init__(nombre, edad, 'perro', refugio)
         self.raza = raza
+        self.patologia = []
 
     def caracteristicas(self, caract):
         print(f'Este perro de la raza {self.raza} tiene estas características: {caract}')
@@ -21,16 +22,16 @@ class Perro(Animales):
 
         informe = f'===== INFORME VETERINARIO =====\n'
         informe += f'Paciente: {self.nombre} | Código: {self.codigo}\n'
-        informe += f'Raza del gato: {self.raza}\n '
+        informe += f'Raza del perro: {self.raza}\n '
         informe += f'Edad: {self.edad} | Tiempo en el refugio: {self.tiempo}\n'
         informe += f'------------------------------\n'
         informe += f'RESULTADOS DE LA REVISIÓN\n'
         informe += f'Dieta asignada: {self.comida}\n'
 
         if estado_dientes:
-            informe += f'Estado Garras: {self.estado_dientes}\n'
+            informe += f'Estado Dientes: {self.estado_dientes}\n'
         else:
-            informe += f'Estado Garras: Sin revisar\n'
+            informe += f'Estado Dientes: Sin revisar\n'
 
         informe += f'------------------------------\n'
         informe += f'PATOLOGIAS:\n'
@@ -43,3 +44,5 @@ class Perro(Animales):
                 informe += f'El animal tiene {pat['enfermedad']} y se cura con {pat['cura']}\n'
 
         self.informe = informe
+
+        return self.informe

@@ -41,3 +41,5 @@ class Gato(Animales):
                 informe += f'El animal tiene {pat['enfermedad']} y se cura con {pat['cura']}\n'
 
         self.informe = informe
+
+        return self.informe
