@@ -144,19 +144,19 @@ def animales():
             else:
                 refugio_seleccionado.mostrar_animales()
 
-            elegido = False
-            while not elegido:
-                seleccion_codigo = input('Seleccione el código de un animal: ')
-                for animal in refugio_seleccionado.animales:
-                    if seleccion_codigo == animal.codigo:
-                        elegido = True
-                        nombre_final = animal
+                elegido = False
+                while not elegido:
+                    seleccion_codigo = input('Seleccione el código de un animal: ')
+                    for animal in refugio_seleccionado.animales:
+                        if seleccion_codigo == animal.codigo:
+                            elegido = True
+                            nombre_final = animal
 
-                if not elegido:
-                    print('El animal seleccionado no está en el refugio elegido')
+                    if not elegido:
+                        print('El animal seleccionado no está en el refugio elegido')
 
-            print(f'Ha elegido a {nombre_final}')
-            print(f'{nombre_final.informe}\n')
+                print(f'Ha elegido a {nombre_final}')
+                print(f'{nombre_final.informe}\n')
 
 
         elif seleccion == 3:  # Llamar a la función necesidad e inspección
@@ -164,45 +164,50 @@ def animales():
             print('De que refugio?')
 
             refugio_seleccionado = seleccionar_refugio()
-            print('De que animal vamos a pasar la inspección?')
 
-            refugio_seleccionado.mostrar_animales()
+            if len(refugio_seleccionado.animales) == 0:
+                print('En este refugio no tiene animales por el momento\n')
 
-            elegido = False
-            while not elegido:
-                seleccion_codigo = input('Seleccione el código de un animal: ')
-                for animal in refugio_seleccionado.animales:
-                    if seleccion_codigo == animal.codigo:
-                        elegido = True
-                        nombre_final = animal
+            elif len(refugio_seleccionado.animales) > 0:
+                print('De que animal vamos a pasar la inspección?')
 
-                if not elegido:
-                    print('El animal seleccionado no está en el refugio elegido')
+                refugio_seleccionado.mostrar_animales()
 
-            comida = input('¿Que comida debe tomar el animal? ')
+                elegido = False
+                while not elegido:
+                    seleccion_codigo = input('Seleccione el código de un animal: ')
+                    for animal in refugio_seleccionado.animales:
+                        if seleccion_codigo == animal.codigo:
+                            elegido = True
+                            nombre_final = animal
 
-            if nombre_final.especie == 'gato':
-                estado_garras = input('¿En que estado se encuentran las garras del gato?: ')
-                enfermo = input('¿El gato está enfermo? (s/n) ')
-                if enfermo == 's':
-                    enfermedad = input('¿Que enfermedad padece? ')
-                    cura = input('¿Cual es la cura de la enfermedad? ')
-                    informe = nombre_final.inspeccion(comida, estado_garras, enfermedad, cura)
-                else:
-                    informe = nombre_final.inspeccion(comida, estado_garras)
+                    if not elegido:
+                        print('El animal seleccionado no está en el refugio elegido')
 
-            elif nombre_final.especie == 'perro':
-                estado_dientes = input('¿En que estado se encuentran los dientes del perro?: ')
-                enfermo = input('¿El perro está enfermo? (s/n) ')
-                if enfermo == 's':
-                    enfermedad = input('¿Que enfermedad padece? ')
-                    cura = input('¿Cual es la cura de la enfermedad? ')
-                    informe = nombre_final.inspeccion(comida, estado_dientes, enfermedad, cura)
-                else:
-                    informe = nombre_final.inspeccion(comida, estado_dientes)
+                comida = input('¿Que comida debe tomar el animal? ')
 
-            print(informe)
-            input('Pulse [Enter] para continuar')
+                if nombre_final.especie == 'gato':
+                    estado_garras = input('¿En que estado se encuentran las garras del gato?: ')
+                    enfermo = input('¿El gato está enfermo? (s/n) ')
+                    if enfermo == 's':
+                        enfermedad = input('¿Que enfermedad padece? ')
+                        cura = input('¿Cual es la cura de la enfermedad? ')
+                        informe = nombre_final.inspeccion(comida, estado_garras, enfermedad, cura)
+                    else:
+                        informe = nombre_final.inspeccion(comida, estado_garras)
+
+                elif nombre_final.especie == 'perro':
+                    estado_dientes = input('¿En que estado se encuentran los dientes del perro?: ')
+                    enfermo = input('¿El perro está enfermo? (s/n) ')
+                    if enfermo == 's':
+                        enfermedad = input('¿Que enfermedad padece? ')
+                        cura = input('¿Cual es la cura de la enfermedad? ')
+                        informe = nombre_final.inspeccion(comida, estado_dientes, enfermedad, cura)
+                    else:
+                        informe = nombre_final.inspeccion(comida, estado_dientes)
+
+                print(informe)
+                input('Pulse [Enter] para continuar')
 
 
         elif seleccion == 4:  #Animal adoptado
@@ -250,13 +255,13 @@ def refugios(mis_refugios):
             print('--- REFUGIOS ACTUALES ---\n')
             for refugio in mis_refugios:
                 if len(refugio.animales) == refugio.tamaño:
-                    print(f'{refugio.nombre.upper()}: Está al máximo de su capacidad, deberá crear otro refugio para seguir acogiendo animales')
+                    print(f'\033[1m{refugio.nombre.upper()}\033[0m: Está al máximo de su capacidad, deberá crear otro refugio para seguir acogiendo animales')
 
                 elif len(refugio.animales) == 0:
-                    print(f'{refugio.nombre.upper()}: No tiene ningún animal todavía')
+                    print(f'\033[1m{refugio.nombre.upper()}\033[0m: No tiene ningún animal todavía')
 
                 else:
-                    print (f'{refugio.nombre.upper()}: Ahora mismo tiene {refugio.animales} en el, por lo que caben {len(refugio.animales) - refugio.tamaño} animales más')
+                    print (f'\033[1m{refugio.nombre.upper()}\033[0m: Ahora mismo tiene {refugio.animales} en el, por lo que caben {len(refugio.animales) - refugio.tamaño} animales más')
 
                 print()
 
