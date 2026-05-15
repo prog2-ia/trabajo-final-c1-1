@@ -6,6 +6,19 @@ from Personas.ClaseUsuario import *
 from Personas.ClaseCuidador import *
 from Personas.ClaseLimpiador import *
 from Personas.ClaseU_Prioritario import *
+import os
+
+
+
+def pedir_entero(entrada):
+    entero = False
+    while not entero:
+        try:
+            valor = int(input(entrada))
+            return valor
+        except ValueError:
+            print('Error: Debe introducir un número entero válido')
+
 
 
 def seleccionar_refugio(): #Para siempre que haya que seleccionar un refugio y mostrar todos sus nombres
@@ -31,7 +44,10 @@ def seleccionar_refugio(): #Para siempre que haya que seleccionar un refugio y m
 
 
 def añadir_animal(): #Elección 2 en la función animales
-    seleccion = int(input('Elija un animal a añadir: '))
+    seleccion = pedir_entero('Elija un animal a añadir: ')
+
+    while seleccion < 1 or seleccion > 3:
+        seleccion = pedir_entero('Error: Introduzca un valor dentro del rango')
 
     if seleccion == 1:  # Añadir perro
         print('\n--- AÑADIR PERRO A UN REFUGIO ---')
@@ -44,14 +60,7 @@ def añadir_animal(): #Elección 2 en la función animales
         else:
             print('Ahora introduzca los datos del perro:')
             nombre = input('Nombre: ')
-            entrada = ''
-            while not entrada.isdigit():
-                entrada = input('Edad: ')
-                if entrada.isdigit():
-                    edad = int(entrada)
-                else:
-                    print('Debe introducir un número')
-
+            edad = pedir_entero('Edad: ')
             raza = input('Raza: ')
 
             Perro(nombre, edad, raza, refugio_seleccionado)
@@ -68,14 +77,7 @@ def añadir_animal(): #Elección 2 en la función animales
         else:
             print('Ahora introduzca los datos del gato:')
             nombre = input('Nombre: ')
-            entrada = ''
-            while not entrada.isdigit():
-                entrada = input('Edad: ')
-                if entrada.isdigit():
-                    edad = int(entrada)
-                else:
-                    print('Debe introducir un número')
-
+            edad = pedir_entero('Edad: ')
             raza = input('Raza: ')
 
             Gato(nombre, edad, raza, refugio_seleccionado)
@@ -92,14 +94,7 @@ def añadir_animal(): #Elección 2 en la función animales
         else:
             print('Ahora introduzca los datos del caballo:')
             nombre = input('Nombre: ')
-            entrada = ''
-            while not entrada.isdigit():
-                entrada = input('Edad: ')
-                if entrada.isdigit():
-                    edad = int(entrada)
-                else:
-                    print('Debe introducir un número')
-
+            edad = pedir_entero('Edad: ')
             raza = input('Raza: ')
 
             Caballo(nombre, edad, raza, refugio_seleccionado)
@@ -118,12 +113,12 @@ def animales():
         print('4: Adopción de animal')
         print('5: Volver al inicio')
 
-        seleccion = int(input('Elija un apartado (1/2/3/4/5): '))
+        seleccion = pedir_entero('Elija un apartado (1/2/3/4/5): ')
         print()
 
         while seleccion < 1 or seleccion > 5:  # Obliga a seleccionar bien
             print('Elija un valor válido')
-            seleccion = int(input('Elija un apartado (1/2/3/4/5): '))
+            seleccion = pedir_entero('Elija un apartado (1/2/3/4/5): ')
 
 
         if seleccion == 1:  # Añadir animal
@@ -196,6 +191,7 @@ def animales():
                     else:
                         informe = nombre_final.inspeccion(comida, estado_garras)
 
+
                 elif nombre_final.especie == 'perro':
                     estado_dientes = input('¿En que estado se encuentran los dientes del perro?: ')
                     enfermo = input('¿El perro está enfermo? (s/n) ')
@@ -206,7 +202,30 @@ def animales():
                     else:
                         informe = nombre_final.inspeccion(comida, estado_dientes)
 
+
+                elif nombre_final.especie == 'caballo':
+                    estado_pezuñas = input('¿En que estado se encuentran las pezuñas del caballo?: ')
+                    enfermo = input('¿El caballo está enfermo? (s/n) ')
+                    if enfermo == 's':
+                        enfermedad = input('¿Que enfermedad padece? ')
+                        cura = input('¿Cual es la cura de la enfermedad? ')
+                        informe = nombre_final.inspeccion(comida, estado_pezuñas, enfermedad, cura)
+                    else:
+                        informe = nombre_final.inspeccion(comida, estado_pezuñas)
+
+                print()
                 print(informe)
+
+                nombre_carpeta = 'Informes'
+
+                if not os.path.exists(nombre_carpeta):
+                    os.makedirs(nombre_carpeta)
+
+                nombre_archivo = f"{nombre_carpeta}/Informe_{nombre_final.codigo}_{nombre_final.nombre}.txt"
+                with open(nombre_archivo, "w", encoding="utf-8") as fichero:
+                    fichero.write(informe)
+
+                print(f'Informe guardado en {nombre_archivo}')
                 input('Pulse [Enter] para continuar')
 
 
@@ -243,12 +262,12 @@ def refugios(mis_refugios):
         print('2: Crear un nuevo refugio')
         print('3: Volver al inicio')
 
-        seleccion = int(input('Elija un apartado (1/2/3): '))
+        seleccion = pedir_entero('Elija un apartado (1/2/3): ')
         print()
 
         while seleccion < 1 or seleccion > 5:  # Obliga a seleccionar bien
             print('Elija un valor válido')
-            seleccion = int(input('Elija un apartado (1/2/3): '))
+            seleccion = pedir_entero('Elija un apartado (1/2/3): ')
 
 
         if seleccion == 1:# Mirar los refugios que tiene
@@ -269,7 +288,7 @@ def refugios(mis_refugios):
         elif seleccion == 2:  # Añadir un refugio
             print('Vamos a añadir un nuevo refugio: ')
             nombre = input('Nombre del refugio: ').lower()
-            tamaño = int(input('Espacio máximo del refugio: '))
+            tamaño = pedir_entero('Espacio máximo del refugio: ')
             print()
 
             mi_refugio = Refugio(nombre, tamaño)
@@ -437,7 +456,7 @@ if __name__ == '__main__':
         mis_refugios = []
         print('Bienvenido al sistema, primero introduzca los datos necesaríos')
         nombre = input('Nombre del refugio: ').lower()
-        tamaño = int(input('Espacio máximo del refugio: '))
+        tamaño = pedir_entero('Espacio máximo del refugio: ')
         print()
 
         mi_refugio = Refugio(nombre, tamaño)
@@ -457,7 +476,7 @@ if __name__ == '__main__':
             print('4: Apartado Refugios')
             print('5: Salir')
 
-            seleccion = int(input('Elija un apartado (1/2/3/4/5): '))
+            seleccion = pedir_entero('Elija un apartado (1/2/3/4/5): ')
             print()
 
 
