@@ -1,8 +1,8 @@
 from Personas.ClaseEmpleado import Empleado
 
 class Cuidador(Empleado):
-    def __init__(self, nombre, edad, genero, dni, tiempo, refugio=None):
-        super().__init__(nombre, edad, genero, dni, tiempo, refugio)
+    def __init__(self, nombre, edad, genero, dni, refugio=None):
+        super().__init__(nombre, edad, genero, dni, 'Cuidador', refugio)
         self.seguimiento_animales = {}  # Diccionario: {animal: horas}
         self.lista_experto = []
 

@@ -1,12 +1,15 @@
 from abc import ABC, abstractmethod
+from xmlrpc.client import escape
+
 
 class Empleado:
-    def __init__(self, nombre, edad, genero, dni, tiempo, refugio = None):
+    def __init__(self, nombre, edad, genero, dni, ofcicio, refugio = None):
+        self.oficio = ofcicio
         self.nombre = nombre
         self.edad = edad
         self.genero = genero
         self.__dni = dni
-        self.tiempo = tiempo
+        self.tiempo = 0
         if refugio:
             refugio.añadir_empleado(self)
 

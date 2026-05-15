@@ -20,7 +20,7 @@ class Refugio:
 
     def mostrar_empleados(self):
         for empleado in self.empleados:
-            print(f"{empleado.nombre} ({empleado.rol})")
+            print(empleado)
 
     def adoptar(self, codigo):
         for animal in self.animales:
