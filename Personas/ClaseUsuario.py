@@ -18,7 +18,10 @@ class Usuario:
             self.contacto = nuevo_contacto
             return "Se ha actualizado con éxito el contácto"
         else:
-            return f"{nuevo_contacto} es el contacto que tiene actualmente señor/a {self.nombre}"
+            if self.genero == 'F':
+                return f"{nuevo_contacto} es el contacto que tiene actualmente doña {self.nombre}"
+            else:
+                return f"{nuevo_contacto} es el contacto que tiene actualmente don {self.nombre}"
 
     def __iadd__(self, cantidad):
         self.puntos_lealtad += cantidad

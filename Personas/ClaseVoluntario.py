@@ -17,7 +17,8 @@ class Voluntario(Usuario, Empleado):
         puntos_ganados = horas // 10
         #usamos la sobrecarga del operador +=
         self += puntos_ganados
-        return f"Voluntario {self.nombre} realizó: {tarea}. Ganó {puntos_ganados} puntos de lealtad."
+        print (f"Voluntario {self.nombre} realizó: {tarea}. Ganó {puntos_ganados} puntos de lealtad.")
+        return puntos_ganados
 
     def realizar_mision(self):
         self.misiones_completadas += 1

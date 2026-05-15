@@ -6,6 +6,7 @@ from Personas.ClaseUsuario import *
 from Personas.ClaseCuidador import *
 from Personas.ClaseLimpiador import *
 from Personas.ClaseU_Prioritario import *
+from Personas.ClaseVoluntario import *
 import os
 
 
@@ -302,12 +303,13 @@ def refugios(mis_refugios):
 
 
 def pedir_dni():
-    while:
+    seguir = True
+    while seguir:
         dni = input('DNI: ')
-        if len(str(nuevo_dni)) == 9:
+        if len(str(dni)) == 9:
             return dni
         else:
-            return f"Error: El DNI debe tener 9 caracteres."
+            print("Error: El DNI debe tener 9 caracteres.")
 
 def añadir_empleado(): #Elección 2 en la función animales
     seleccion = pedir_entero('¿Cuál es su futura ocupación? ')
@@ -323,11 +325,11 @@ def añadir_empleado(): #Elección 2 en la función animales
         print('Ahora introduzca los datos del empleado:')
         nombre = input('Nombre: ')
         edad = pedir_entero('Edad: ')
-        genero = input('Género: ')
-        DNI = pedir_dni()
+        genero = input('Género(F/M): ').upper()
+        dni = pedir_dni()
 
 
-        Cuidador(nombre, edad, genero, DNI, refugio_seleccionado)
+        Cuidador(nombre, edad, genero, dni, refugio_seleccionado)
         print('Se ha introducido correctamente al cuidador/a en la base de datos\n')
 
     elif seleccion == 2:
@@ -338,11 +340,11 @@ def añadir_empleado(): #Elección 2 en la función animales
         print('Ahora introduzca los datos del empleado:')
         nombre = input('Nombre: ')
         edad = pedir_entero('Edad: ')
-        genero = input('Género: ')
-        DNI = pedir_dni()
+        genero = input('Género(F/M): ').upper()
+        dni = pedir_dni()
         salario = pedir_entero('Introduzca el salario inicial acordado: ')
 
-        Limpiador(nombre, edad, genero, DNI, salario, refugio_seleccionado)
+        Limpiador(nombre, edad, genero, dni, salario, refugio_seleccionado)
         print('Se ha introducido correctamente al limpiador/a en la base de datos\n')
 
 
@@ -354,7 +356,7 @@ def trabajadores():
         print('1: Añadir un nuevo Trabajador')
         print('2: Buscar trabajadores por DNI')
         print('3: Registro del trabajo de hoy')  # Clase abstracta
-        print('4: (Cuidadores Only) Añadir animal con el que trabajar')
+        print('4: Acciones administrativas')
         print('5: Volver al inicio')
 
         seleccion = pedir_entero('Elija un apartado (1/2/3/4/5): ')
@@ -364,7 +366,7 @@ def trabajadores():
             print('Elija un valor válido')
             seleccion = pedir_entero('Elija un apartado (1/2/3/4/5): ')
 
-        if seleccion == 1:  # Añadir animal
+        if seleccion == 1:  # Añadir empleado
             print('Opciones de empleo ')
             print('1: Cuidador')
             print('2: Limpiador')
@@ -372,7 +374,7 @@ def trabajadores():
             añadir_empleado()
 
 
-        elif seleccion == 2:  # Ver todos los animales
+        elif seleccion == 2:  # Ver todos los empleados
             print('¿En que refugio se encuentra el empleado que buscas?: ')
             refugio_seleccionado = seleccionar_refugio()
             if len(refugio_seleccionado.empleados) == 0:
@@ -397,10 +399,10 @@ def trabajadores():
                 cambio = input('Desea cambiar el DNI?(S/N) ')
                 if cambio.upper() == 'S':
                     nuevo_dni = pedir_dni()
-                    empleado.dni = nuevo_dni
+                    nombre_final.dni = nuevo_dni
 
 
-        elif seleccion == 3:  # Llamar a la función necesidad e inspección
+        elif seleccion == 3:  # Llamar a las funciones trabajo
             print('Momento de ver cuanti tiempo hemos trabajado hoy')
             print('De que refugio?')
 
@@ -418,7 +420,7 @@ def trabajadores():
                 while not elegido:
                     seleccion_codigo = pedir_dni()
                     for empleado in refugio_seleccionado.empleados:
-                        if seleccion_codigo == empleado.codigo:
+                        if seleccion_codigo == empleado.dni:
                             elegido = True
                             nombre_final = empleado
 
@@ -426,26 +428,153 @@ def trabajadores():
                         print('El empleado seleccionado no está en el refugio elegido')
 
                 if nombre_final.oficio == 'Cuidador':
-                    animal = input('¿Con que animal está trabajando?: ')
+                    animal = input('¿Con que animal ha estado trabajando? ')
                     horas = pedir_entero('¿Cuantas horas ha trabajado? ')
+                    nombre_final.trabajar(animal, horas)
 
-                elif nombre_final.especie == 'perro':
-                    estado_dientes = input('¿En que estado se encuentran los dientes del perro?: ')
-                    enfermo = input('¿El perro está enfermo? (s/n) ')
-                    if enfermo == 's':
-                        enfermedad = input('¿Que enfermedad padece? ')
-                        cura = input('¿Cual es la cura de la enfermedad? ')
-                        informe = nombre_final.inspeccion(comida, estado_dientes, enfermedad, cura)
-                    else:
-                        informe = nombre_final.inspeccion(comida, estado_dientes)
+                elif nombre_final.oficio == 'Limpiador':
+                    print('Buen trabajo hoy')
+                    horas = int(input('Cuantas horas has hecho hoy? '))
+                    nombre_final.trabajar(horas)
 
-                print(informe)
-                input('Pulse [Enter] para continuar')
+        elif seleccion == 4:  # Opciones administrativas
+            print('A continuación se le hará una serie de preguntas para saber cual proceso administrativo desea realizar')
+            print('De que refugio forma parte?')
 
+            refugio_seleccionado = seleccionar_refugio()
 
+            if len(refugio_seleccionado.empleados) == 0:
+                print('En este refugio no tiene animales por el momento\n')
+
+            elif len(refugio_seleccionado.empleados) > 0:
+                print('A continuación se le pedirá el dni para llevarle al proceso administrativo que mejor se adecue a su situación')
+
+                refugio_seleccionado.mostrar_empleados()
+
+                elegido = False
+                while not elegido:
+                    seleccion_codigo = pedir_dni()
+                    for empleado in refugio_seleccionado.empleados:
+                        if seleccion_codigo == empleado.dni:
+                            elegido = True
+                            nombre_final = empleado
+
+                    if not elegido:
+                        print('El empleado seleccionado no está en el refugio elegido')
+
+                if nombre_final.oficio == 'Cuidador':
+                    print('Agradecemos mucho su trabajo voluntario')
+                    print('Sin embargo no hay ningún proceso administrativo del cual puedas hacer uso')
+
+                elif nombre_final.oficio == 'Limpiador':
+                    print('Ahora es momento de solicitar su preciado aumento')
+                    print('Antes de nada los recordatorios: ')
+                    print('1. Puede solicitar su aumento de salario de forma indefinida, no hay penalización')
+                    print('2. El mínimo de horas para solicitar el aumento son 4200h')
+                    espera = input("si está usted de acuerdo con los téminos y condiciones pulse [ENTER]")
+                    nombre_final.aumento()
+                
+        elif seleccion == 5:  #Volver para atrás
+            seguir = False
+
+    return mis_refugios
+
+def buscar_usuario(dni, lista_usuarios):
+    for i in lista_usuarios:
+        if i.dni == dni:
+            return i
+    return None
 
 def clientes():
-    pass
+    seguir = True
+    while seguir:
+        print('Bienvenido al apartado trabajadores, estas son las opciones:')
+        print('1: Añadir un nuevo Usuario')
+        print('2: Activar membresía por DNI')
+        print('3: Registrarse como Voluntario')  
+        print('4: Registrar trabajo coluntario')
+        print('5: Ajustes de Usuario')
+        print('6: Volver al inicio')
+
+        seleccion = pedir_entero('Elija un apartado (1/2/3/4/5/6): ')
+        print()
+
+        while seleccion < 1 or seleccion > 6:  # Obliga a seleccionar bien
+            print('Elija un valor válido')
+            seleccion = pedir_entero('Elija un apartado (1/2/3/4/5/6): ')
+
+        if seleccion == 1:  # Añadir Usuario
+            print('\n--- NUEVO CLIENTE ---')
+            nombre = input('Nombre: ')
+            dni = pedir_dni()
+            if buscar_usuario(dni, lista_usuarios):
+                print("Error: Ya existe un usuario con ese DNI.")
+            else:
+                contacto = input('Número de contacto: ')
+                genero = input('Género(F/M): ').upper()
+                residencia = input('Dirección: ')
+                nuevo_u = Usuario(nombre, dni, contacto, residencia, genero)
+                lista_usuarios.append(nuevo_u)
+                print(f'Usuario {nombre} registrado con éxito.\n')
+
+        elif seleccion == 2: # Activar Socio (U_Prioritario)
+            print('Para poder proceder por porfavor introduzca su DNI: ')
+            dni = pedir_dni()
+            cliente = buscar_usuario(dni, lista_usuarios)
+            if cliente:
+                print('Para convertirte en Usuario Prioritario, primero deberás pagar 20€')
+                cuota = pedir_entero("Ingrese cuota mensual: ")
+                
+                # Convertimos o creamos el socio
+                nuevo_socio = Socio(cliente.nombre, cliente.dni, cliente.contacto, cliente.residencia, cliente.genero, cuota)
+                print(nuevo_socio.comprobar_socio())
+                # Reemplazamos en la lista
+                if nuevo_socio.comprobar_socio:
+                    lista_usuarios.remove(cliente)
+                    lista_usuarios.append(nuevo_socio)
+                else:
+                    print('Pruebe con otra cantidad')
+            else:
+                print("Primero registre al usuario como base (Opción 1).")
+
+        elif seleccion == 3: # Registrar como Voluntario
+            print('Para poder proceder por porfavor introduzca su DNI: ')
+            dni = pedir_dni()
+            cliente = buscar_usuario(dni, lista_usuarios)
+            if cliente:
+                edad = pedir_entero("Edad: ")
+                refugio_asig = seleccionar_refugio() 
+                nuevo_vol = Voluntario(cliente.nombre, edad, cliente.genero, cliente.dni, cliente.contacto, cliente.residencia, refugio_asig)
+                lista_usuarios.remove(cliente)
+                lista_usuarios.append(nuevo_vol)
+                refugio_asig.añadir_empleado(nuevo_vol)
+                print(f"{cliente.nombre} ahora es voluntario en {refugio_asig.nombre}")
+            else:
+                print("Primero registre al usuario como base (Opción 1).")
+
+        elif seleccion == 4: # Registrar trabajo voluntario
+            dni = pedir_dni()
+            cliente = buscar_usuario(dni, lista_usuarios)
+            if isinstance(cliente, Voluntario):
+                horas = pedir_entero("¿Cuántas horas ha trabajado hoy? ")
+                tarea = input("Tarea realizada: ")
+                cliente.trabajar(horas, tarea)
+            else:
+                print("Este usuario no está registrado como Voluntario.")
+
+        elif seleccion == 5: # Ajustes
+            dni = pedir_dni()
+            cliente = buscar_usuario(dni, lista_usuarios)
+            if cliente:
+                nuevo_c = input("Nuevo contacto: ")
+                print(cliente.actualizar_contacto(nuevo_c))
+            else:
+                print("Primero registre al usuario como base (Opción 1).")
+
+        elif seleccion == 6:
+            seguir = False
+    
+    return lista_usuarios, mis_refugios
 
 
 
@@ -454,6 +583,7 @@ if __name__ == '__main__':
     while ejecutando:
 
         mis_refugios = []
+        lista_usuarios = []
         print('Bienvenido al sistema, primero introduzca los datos necesaríos')
         nombre = input('Nombre del refugio: ').lower()
         tamaño = pedir_entero('Espacio máximo del refugio: ')
@@ -487,7 +617,7 @@ if __name__ == '__main__':
                 trabajadores()
 
             elif seleccion == 3: #Apartado Clientes
-                clientes()
+                lista_usuarios = clientes()
 
             elif seleccion == 4: #Apartado Refugios
                 mis_refugios = refugios(mis_refugios)

@@ -9,8 +9,10 @@ class Limpiador(Empleado):
     def trabajar(self, horas):
         self.tiempo += horas
 
-    def aumento(self, horas):
+    def aumento(self):
         if self.tiempo // 4200 > 0:
-            self.tiempo = 0
+            self.tiempo -= 4200
             self.salario *= 1.10
             return f"¡Aumento de sueldo para {self.nombre}! Nuevo salario: {self.salario}"
+        else:
+            return f"Desgraciadamente no cumpre los requisitos para el aumento"

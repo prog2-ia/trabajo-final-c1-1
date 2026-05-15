@@ -1,11 +1,10 @@
 from Personas.ClaseUsuario import Usuario
 
 class Socio(Usuario):
-    def __init__(self, nombre, dni, contacto, residencia, genero, cuota, prioridad):
+    def __init__(self, nombre, dni, contacto, residencia, genero, cuota):
         super().__init__(nombre, dni, contacto, residencia, genero)
 
         self.cuota_mensual = cuota
-        self.prioridad = prioridad
         self.historial_adopciones = []
         self.membresia_activa = False
 
@@ -24,10 +23,8 @@ class Socio(Usuario):
         else:
             return f"Error: {self.nombre} no tiene una membresía activa para generar certificados."
 
-    def calcular_descuento_veterinaria(self, precio_veterinario):
-        if self.membresia_activa:
-            return precio_veterinario * 0.8
-        return precio_veterinario
+    def pagar_cuota(self, dinero):
+        cueta += dinero
 
     def __bool__(self): #definimos el metodo __bool__
         self.comprobar_socio()
