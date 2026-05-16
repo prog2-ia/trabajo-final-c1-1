@@ -315,7 +315,7 @@ def anyadir_empleado(): #
     seleccion = pedir_entero('¿Cuál es su futura ocupación? ')
     while seleccion < 1 or seleccion > 2:  # Obliga a seleccionar bien
         print('Elija un valor válido')
-        seleccion = int(input('Elija un apartado (1/2): '))
+        seleccion = pedir_entero('Elija un apartado (1/2): ')
 
     if seleccion == 1:  #Añadirlo como cuidador
         print('\n--- NUEVO CUIDADOR EN EL REFUGIO ---')
