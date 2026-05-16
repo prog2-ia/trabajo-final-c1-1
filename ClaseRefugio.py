@@ -6,7 +6,7 @@ class Refugio:
         self.empleados = []
 
     def __str__(self):
-        return f'Refugio "{self.nombre}" (Animales: {len(self.animales)}/{self.tamaño})'
+        return f'Refugio "{self.nombre}" (Animales: {len(self.animales)}/{self.tamanyo})'
 
     def anyadir_animal(self, animal):
         self.animales.append(animal)

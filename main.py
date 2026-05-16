@@ -8,6 +8,8 @@ from Personas.ClaseLimpiador import *
 from Personas.ClaseU_Prioritario import *
 from Personas.ClaseVoluntario import *
 import os
+import pickle
+from datetime import datetime
 
 
 
@@ -23,24 +25,29 @@ def pedir_entero(entrada):
 
 
 def seleccionar_refugio(mis_refugios): #Para siempre que haya que seleccionar un refugio y mostrar todos sus nombres
-    for refugio in mis_refugios:
-        print(refugio)
+    if len(mis_refugios) == 0:
+        print('No hay ningún refugio creado')
+        return None
 
-    refugio_seleccionado = None
-
-    while refugio_seleccionado == None:
-        refu = input('¿Que refugio elijes?: ')
+    else:
         for refugio in mis_refugios:
-            if refugio.nombre.lower() == refu.lower():
-                refugio_seleccionado = refugio
+            print(refugio)
 
-        if refugio_seleccionado == None:
-            print('Este refugio no está en tú lista de refugios\n')
+        refugio_seleccionado = None
 
-        else:
-            print(f'El refugio seleccionado es: {refugio_seleccionado.nombre}')
+        while refugio_seleccionado == None:
+            refu = input('¿Que refugio elijes?: ')
+            for refugio in mis_refugios:
+                if refugio.nombre.lower() == refu.lower():
+                    refugio_seleccionado = refugio
 
-    return refugio_seleccionado
+            if refugio_seleccionado == None:
+                print('Este refugio no está en tú lista de refugios\n')
+
+            else:
+                print(f'El refugio seleccionado es: {refugio_seleccionado.nombre}')
+
+        return refugio_seleccionado
 
 
 
@@ -64,7 +71,7 @@ def anyadir_animal(mis_refugios): #Elección 2 en la función animales
             edad = pedir_entero('Edad: ')
             raza = input('Raza: ')
 
-            Perro(nombre, edad, raza, refugio_seleccionado)
+            nuevo_perro = Perro(nombre, edad, raza, refugio_seleccionado)
             print('Se ha introducido correctamente al perro en la base de datos\n')
 
     elif seleccion == 2:
@@ -81,7 +88,7 @@ def anyadir_animal(mis_refugios): #Elección 2 en la función animales
             edad = pedir_entero('Edad: ')
             raza = input('Raza: ')
 
-            Gato(nombre, edad, raza, refugio_seleccionado)
+            nuevo_gato = Gato(nombre, edad, raza, refugio_seleccionado)
             print('Se ha introducido correctamente al gato en la base de datos\n')
 
     elif seleccion == 3:
@@ -98,7 +105,7 @@ def anyadir_animal(mis_refugios): #Elección 2 en la función animales
             edad = pedir_entero('Edad: ')
             raza = input('Raza: ')
 
-            Caballo(nombre, edad, raza, refugio_seleccionado)
+            nuevo_caballo = Caballo(nombre, edad, raza, refugio_seleccionado)
             print('Se ha introducido correctamente al caballo en la base de datos\n')
 
 
@@ -142,7 +149,7 @@ def animales(mis_refugios):
 
                 elegido = False
                 while not elegido:
-                    seleccion_codigo = input('Seleccione el código de un animal: ')
+                    seleccion_codigo = input('Seleccione el código de un animal: ').upper()
                     for animal in refugio_seleccionado.animales:
                         if seleccion_codigo == animal.codigo:
                             elegido = True
@@ -171,7 +178,7 @@ def animales(mis_refugios):
 
                 elegido = False
                 while not elegido:
-                    seleccion_codigo = input('Seleccione el código de un animal: ')
+                    seleccion_codigo = input('Seleccione el código de un animal: ').upper()
                     for animal in refugio_seleccionado.animales:
                         if seleccion_codigo == animal.codigo:
                             elegido = True
@@ -184,7 +191,7 @@ def animales(mis_refugios):
 
                 if nombre_final.especie == 'gato':
                     estado_garras = input('¿En que estado se encuentran las garras del gato?: ')
-                    enfermo = input('¿El gato está enfermo? (s/n) ')
+                    enfermo = input('¿El gato está enfermo? (s/n) ').lower()
                     if enfermo == 's':
                         enfermedad = input('¿Que enfermedad padece? ')
                         cura = input('¿Cual es la cura de la enfermedad? ')
@@ -195,7 +202,7 @@ def animales(mis_refugios):
 
                 elif nombre_final.especie == 'perro':
                     estado_dientes = input('¿En que estado se encuentran los dientes del perro?: ')
-                    enfermo = input('¿El perro está enfermo? (s/n) ')
+                    enfermo = input('¿El perro está enfermo? (s/n) ').lower()
                     if enfermo == 's':
                         enfermedad = input('¿Que enfermedad padece? ')
                         cura = input('¿Cual es la cura de la enfermedad? ')
@@ -206,7 +213,7 @@ def animales(mis_refugios):
 
                 elif nombre_final.especie == 'caballo':
                     estado_pezunyas = input('¿En que estado se encuentran las pezuñas del caballo?: ')
-                    enfermo = input('¿El caballo está enfermo? (s/n) ')
+                    enfermo = input('¿El caballo está enfermo? (s/n) ').lower()
                     if enfermo == 's':
                         enfermedad = input('¿Que enfermedad padece? ')
                         cura = input('¿Cual es la cura de la enfermedad? ')
@@ -245,6 +252,20 @@ def animales(mis_refugios):
 
                 if exito:
                     print(f'¡Felicidades! el animal con código {codigo} ha sido adoptado')
+                    carpeta_historial = 'Historial'
+
+                    if not os.path.exists(carpeta_historial):
+                        os.makedirs(carpeta_historial)
+
+                    try:
+                        ruta_txt = os.path.join(carpeta_historial, 'Historial_Adopción.txt')
+                        fecha = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+
+                        with open(ruta_txt, "a", encoding="utf-8") as fichero:
+                            fichero.write(f"[{fecha}] El animal con código {codigo} del refugio '{refugio_seleccionado.nombre}' ha sido adoptado.\n")
+
+                    except Exception as e:
+                        print(f"Error al escribir el historial: {e}")
 
                 else:
                     print(f'Error: No existe ningún animal con código {codigo} en el refugio {refugio_seleccionado.nombre}')
@@ -530,7 +551,7 @@ def clientes(mis_refugios, lista_usuarios):
                 nuevo_socio = Socio(cliente.nombre, cliente.dni, cliente.contacto, cliente.residencia, cliente.genero, cuota)
                 print(nuevo_socio.comprobar_socio())
                 # Reemplazamos en la lista
-                if nuevo_socio.comprobar_socio: #Aqui no debería ir nuevo_socio.membresia_activa?
+                if nuevo_socio:
                     lista_usuarios.remove(cliente)
                     lista_usuarios.append(nuevo_socio)
                 else:
@@ -579,10 +600,47 @@ def clientes(mis_refugios, lista_usuarios):
 
 
 
-if __name__ == '__main__':
-    ejecutando = True
-    while ejecutando:
+def guardar_datos(mis_refugios, lista_usuarios):
+    carpeta_base_datos = 'BaseDatos'
 
+    if not os.path.exists(carpeta_base_datos):
+        os.makedirs(carpeta_base_datos)
+
+    ruta_pkl = os.path.join(carpeta_base_datos, 'datos.pkl')
+    try:
+        with open(ruta_pkl, 'wb') as fichero:
+            pickle.dump((mis_refugios, lista_usuarios), fichero)
+        print('\nSe ha guardado todo de manera correcta')
+
+    except Exception as e:
+        print(f'Error al guardar los datos: {e}')
+
+
+
+def cargar_datos():
+    ruta_pkl = os.path.join('BaseDatos', 'datos_sistema.pkl')
+
+    if os.path.exists(ruta_pkl):
+        try:
+            with open(ruta_pkl, 'rb') as fichero:
+                mis_refugios, lista_usuarios = pickle.load(fichero)
+            return mis_refugios, lista_usuarios
+        except Exception as e:
+            print(f"Error al leer el archivo: {e}. Iniciando sistema nuevo.\n")
+            return [], []
+
+    else:
+        print('No se han encontrado datos previos. Iniciando sistema nuevo.\n')
+        return [], []
+
+
+
+if __name__ == '__main__':
+    print('--- INICIANDO SISTEMA DEL REFUGIO ---')
+
+    mis_refugios, lista_usuarios = cargar_datos()
+
+    if len(mis_refugios) == 0:
         mis_refugios = []
         lista_usuarios = []
         print('Bienvenido al sistema, primero introduzca los datos necesaríos')
@@ -593,8 +651,9 @@ if __name__ == '__main__':
         mi_refugio = Refugio(nombre, tamanyo)
         mis_refugios.append(mi_refugio)
 
-        inicio = True
-        while inicio:
+
+        ejecutando = True
+        while ejecutando:
 
             print('-' * 50)
             print('Base de datos del refugio de animales')
@@ -624,7 +683,7 @@ if __name__ == '__main__':
                 mis_refugios = refugios(mis_refugios)
 
             elif seleccion == 5: #Salir del programa
-                inicio = False
+                guardar_datos(mis_refugios, lista_usuarios)
                 ejecutando = False
 
             else:
