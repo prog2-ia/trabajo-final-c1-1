@@ -26,7 +26,7 @@ class Animales(ABC):
         self.codigo = f'{letra}{Animales.total_animales}'
 
         if refugio:
-            refugio.añadir_animal(self)
+            refugio.anyadir_animal(self)
 
     def __str__(self): #En caso de que alguien haga print(Nombre_Perro)
         return f'Código: {self.codigo}. Nombre: {self.nombre}. Especie: {self.especie}'
@@ -39,7 +39,7 @@ class Animales(ABC):
     def mostrar_censo(cls):
         return f'Total histórico de animales registrados: {cls.total_animales}'
 
-    def añadir_tiempo(self, tiempo):
+    def anyadir_tiempo(self, tiempo):
         self.tiempo += tiempo
 
     @abstractmethod

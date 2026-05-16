@@ -11,7 +11,7 @@ class Empleado(ABC):
         self.__dni = dni
         self.tiempo = 0
         if refugio:
-            refugio.añadir_empleado(self)
+            refugio.anyadir_empleado(self)
 
 
     @property

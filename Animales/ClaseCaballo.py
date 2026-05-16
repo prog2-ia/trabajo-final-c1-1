@@ -7,11 +7,11 @@ class Caballo(Animales):
         self.raza = raza
         self.patologia = []
 
-    def inspeccion(self, comida, estado_pezuñas = None, enfermedad = None, cura = None):
+    def inspeccion(self, comida, estado_pezunyas = None, enfermedad = None, cura = None):
         self.comida = comida
 
-        if estado_pezuñas:
-            self.estado_garras = estado_pezuñas
+        if estado_pezunyas:
+            self.estado_pezunyas = estado_pezunyas
 
         if enfermedad and cura:
             dic_pat = {'enfermedad': enfermedad, 'cura': cura}
@@ -25,8 +25,8 @@ class Caballo(Animales):
         informe += f'RESULTADOS DE LA REVISIÓN\n'
         informe += f'Dieta asignada: {self.comida}\n'
 
-        if estado_pezuñas:
-            informe += f'Estado Pezuñas: {self.estado_garras}\n'
+        if estado_pezunyas:
+            informe += f'Estado Pezuñas: {self.estado_pezunyas}\n'
         else:
             informe += f'Estado Pezuñas: Sin revisar\n'
 

@@ -55,7 +55,7 @@ def anyadir_animal(mis_refugios): #Elección 2 en la función animales
         print('Puedes añadir el perro a los siguientes refugios:')
         refugio_seleccionado = seleccionar_refugio(mis_refugios)
 
-        if len(refugio_seleccionado.animales) >= refugio_seleccionado.tamaño:
+        if len(refugio_seleccionado.animales) >= refugio_seleccionado.tamanyo:
             print('Este refugio ya está lleno\n')
 
         else:
@@ -72,7 +72,7 @@ def anyadir_animal(mis_refugios): #Elección 2 en la función animales
         print('Puedes añadir el gato a los siguientes refugios:')
         refugio_seleccionado = seleccionar_refugio(mis_refugios)
 
-        if len(refugio_seleccionado.animales) >= refugio_seleccionado.tamaño:
+        if len(refugio_seleccionado.animales) >= refugio_seleccionado.tamanyo:
             print('Este refugio ya está lleno\n')
 
         else:
@@ -89,7 +89,7 @@ def anyadir_animal(mis_refugios): #Elección 2 en la función animales
         print('Puedes añadir el caballo a los siguientes refugios:')
         refugio_seleccionado = seleccionar_refugio(mis_refugios)
 
-        if len(refugio_seleccionado.animales) >= refugio_seleccionado.tamaño:
+        if len(refugio_seleccionado.animales) >= refugio_seleccionado.tamanyo:
             print('Este refugio ya está lleno\n')
 
         else:
@@ -274,14 +274,14 @@ def refugios(mis_refugios):
         if seleccion == 1:# Mirar los refugios que tiene
             print('--- REFUGIOS ACTUALES ---\n')
             for refugio in mis_refugios:
-                if len(refugio.animales) == refugio.tamaño:
+                if len(refugio.animales) == refugio.tamanyo:
                     print(f'\033[1m{refugio.nombre.upper()}\033[0m: Está al máximo de su capacidad, deberá crear otro refugio para seguir acogiendo animales')
 
                 elif len(refugio.animales) == 0:
                     print(f'\033[1m{refugio.nombre.upper()}\033[0m: No tiene ningún animal todavía')
 
                 else:
-                    print (f'\033[1m{refugio.nombre.upper()}\033[0m: Ahora mismo tiene {refugio.animales} en el, por lo que caben {len(refugio.animales) - refugio.tamaño} animales más')
+                    print (f'\033[1m{refugio.nombre.upper()}\033[0m: Ahora mismo tiene {refugio.animales} en el, por lo que caben {len(refugio.animales) - refugio.tamanyo} animales más')
 
                 print()
 
@@ -311,7 +311,7 @@ def pedir_dni():
         else:
             print("Error: El DNI debe tener 9 caracteres.")
 
-def anyadir_empleado(): #
+def anyadir_empleado(mis_refugios): #
     seleccion = pedir_entero('¿Cuál es su futura ocupación? ')
     while seleccion < 1 or seleccion > 2:  # Obliga a seleccionar bien
         print('Elija un valor válido')
@@ -371,7 +371,7 @@ def trabajadores(mis_refugios):
             print('1: Cuidador')
             print('2: Limpiador')
 
-            anyadir_empleado()
+            anyadir_empleado(mis_refugios)
 
 
         elif seleccion == 2:  # Ver todos los empleados
@@ -405,7 +405,6 @@ def trabajadores(mis_refugios):
         elif seleccion == 3:  # Llamar a las funciones trabajo
             print('Momento de ver cuanti tiempo hemos trabajado hoy')
             print('De que refugio?')
-
             refugio_seleccionado = seleccionar_refugio(mis_refugios)
 
             if len(refugio_seleccionado.empleados) == 0:
@@ -434,7 +433,7 @@ def trabajadores(mis_refugios):
 
                 elif nombre_final.oficio == 'Limpiador':
                     print('Buen trabajo hoy')
-                    horas = int(input('Cuantas horas has hecho hoy? '))
+                    horas = pedir_entero('Cuantas horas has hecho hoy? ')
                     nombre_final.trabajar(horas)
 
         elif seleccion == 4:  # Opciones administrativas
@@ -549,7 +548,7 @@ def clientes(mis_refugios, lista_usuarios):
                 nuevo_vol = Voluntario(cliente.nombre, edad, cliente.genero, cliente.dni, cliente.contacto, cliente.residencia, refugio_asig)
                 lista_usuarios.remove(cliente)
                 lista_usuarios.append(nuevo_vol)
-                refugio_asig.añadir_empleado(nuevo_vol)
+                refugio_asig.anyadir_empleado(nuevo_vol)
                 print(f"{cliente.nombre} ahora es voluntario en {refugio_asig.nombre}")
             else:
                 print("Primero registre al usuario como base (Opción 1).")
