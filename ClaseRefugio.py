@@ -22,7 +22,7 @@ class Refugio:
         for empleado in self.empleados:
             print(empleado)
 
-    def adoptar(self, codigo):
+    def adoptar(self, codigo, dni):
         for animal in self.animales:
             if animal.codigo == codigo:
                 self.animales.remove(animal)

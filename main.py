@@ -115,7 +115,7 @@ def anyadir_animal(mis_refugios): #Elección 2 en la función animales
 
 
 
-def animales(mis_refugios):
+def animales(mis_refugios, lista_usuarios):
 
     seguir = True
     while seguir:
@@ -248,6 +248,22 @@ def animales(mis_refugios):
 
         elif seleccion == 4:  #Animal adoptado
             print('--- TRÁMITE DE ADOPCIÓN ---')
+            if len(lista_usuarios) == 0:
+                print('No hay usuarios que puedan adoptar.\n')
+                return
+
+            print('¿Quien va a adoptar al animal?')
+            for persona in lista_usuarios:
+                print(persona.dni)
+
+            dni = pedir_dni()
+            cliente = buscar_usuario(dni, lista_usuarios)
+            while cliente == None:
+                print('Este usuario no existe')
+                dni = pedir_dni()
+                cliente = buscar_usuario(dni, lista_usuarios)
+
+            print('Posibles refugios a elegir:')
             refugio_seleccionado = seleccionar_refugio(mis_refugios)
             if refugio_seleccionado == None:
                 return
@@ -259,10 +275,10 @@ def animales(mis_refugios):
                 refugio_seleccionado.mostrar_animales()
                 codigo = input('Introduce el código del animal a adoptar: ')
 
-                exito = refugio_seleccionado.adoptar(codigo)
+                exito = refugio_seleccionado.adoptar(codigo, cliente.dni)
 
                 if exito:
-                    print(f'¡Felicidades! el animal con código {codigo} ha sido adoptado')
+                    print(f'¡Felicidades! el animal con código {codigo} ha sido adoptado por {cliente.nombre} con DNI: {cliente.dni}.\n ')
                     carpeta_historial = 'Historial'
 
                     if not os.path.exists(carpeta_historial):
@@ -273,7 +289,7 @@ def animales(mis_refugios):
                         fecha = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
 
                         with open(ruta_txt, "a", encoding="utf-8") as fichero:
-                            fichero.write(f"[{fecha}] El animal con código {codigo} del refugio '{refugio_seleccionado.nombre}' ha sido adoptado.\n")
+                            fichero.write(f"[{fecha}] El animal con código {codigo} del refugio '{refugio_seleccionado.nombre}' ha sido adoptado por {cliente.nombre} con DNI: {cliente.dni}.\n")
 
                     except Exception as e:
                         print(f"Error al escribir el historial: {e}")
@@ -694,7 +710,7 @@ if __name__ == '__main__':
 
 
         if seleccion == 1:#Apartado animales
-            animales(mis_refugios)
+            animales(mis_refugios, lista_usuarios)
 
         elif seleccion == 2: #Apartado Trabajadores
             trabajadores(mis_refugios)
