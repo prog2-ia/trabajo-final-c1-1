@@ -22,7 +22,7 @@ def pedir_entero(entrada):
 
 
 
-def seleccionar_refugio(): #Para siempre que haya que seleccionar un refugio y mostrar todos sus nombres
+def seleccionar_refugio(mis_refugios): #Para siempre que haya que seleccionar un refugio y mostrar todos sus nombres
     for refugio in mis_refugios:
         print(refugio)
 
@@ -44,7 +44,7 @@ def seleccionar_refugio(): #Para siempre que haya que seleccionar un refugio y m
 
 
 
-def añadir_animal(): #Elección 2 en la función animales
+def anyadir_animal(mis_refugios): #Elección 2 en la función animales
     seleccion = pedir_entero('Elija un animal a añadir: ')
 
     while seleccion < 1 or seleccion > 3:
@@ -53,7 +53,7 @@ def añadir_animal(): #Elección 2 en la función animales
     if seleccion == 1:  # Añadir perro
         print('\n--- AÑADIR PERRO A UN REFUGIO ---')
         print('Puedes añadir el perro a los siguientes refugios:')
-        refugio_seleccionado = seleccionar_refugio()
+        refugio_seleccionado = seleccionar_refugio(mis_refugios)
 
         if len(refugio_seleccionado.animales) >= refugio_seleccionado.tamaño:
             print('Este refugio ya está lleno\n')
@@ -70,7 +70,7 @@ def añadir_animal(): #Elección 2 en la función animales
     elif seleccion == 2:
         print('--- AÑADIR GATO A UN REFUGIO ---\n')
         print('Puedes añadir el gato a los siguientes refugios:')
-        refugio_seleccionado = seleccionar_refugio()
+        refugio_seleccionado = seleccionar_refugio(mis_refugios)
 
         if len(refugio_seleccionado.animales) >= refugio_seleccionado.tamaño:
             print('Este refugio ya está lleno\n')
@@ -87,7 +87,7 @@ def añadir_animal(): #Elección 2 en la función animales
     elif seleccion == 3:
         print('--- AÑADIR CABALLO A UN REFUGIO ---\n')
         print('Puedes añadir el caballo a los siguientes refugios:')
-        refugio_seleccionado = seleccionar_refugio()
+        refugio_seleccionado = seleccionar_refugio(mis_refugios)
 
         if len(refugio_seleccionado.animales) >= refugio_seleccionado.tamaño:
             print('Este refugio ya está lleno\n')
@@ -103,7 +103,7 @@ def añadir_animal(): #Elección 2 en la función animales
 
 
 
-def animales():
+def animales(mis_refugios):
 
     seguir = True
     while seguir:
@@ -128,12 +128,12 @@ def animales():
             print('2: Gato')
             print('3: Caballo')
 
-            añadir_animal()
+            anyadir_animal(mis_refugios)
 
 
         elif seleccion == 2:  # Ver todos los animales
             print('¿En que refugio se encuentra el animal que buscas?: ')
-            refugio_seleccionado = seleccionar_refugio()
+            refugio_seleccionado = seleccionar_refugio(mis_refugios)
             if len(refugio_seleccionado.animales) == 0:
                 print('No hay animales en este refugio por el momento\n')
 
@@ -159,7 +159,7 @@ def animales():
             print('Vamos a pasar una inspección')
             print('De que refugio?')
 
-            refugio_seleccionado = seleccionar_refugio()
+            refugio_seleccionado = seleccionar_refugio(mis_refugios)
 
             if len(refugio_seleccionado.animales) == 0:
                 print('En este refugio no tiene animales por el momento\n')
@@ -205,14 +205,14 @@ def animales():
 
 
                 elif nombre_final.especie == 'caballo':
-                    estado_pezuñas = input('¿En que estado se encuentran las pezuñas del caballo?: ')
+                    estado_pezunyas = input('¿En que estado se encuentran las pezuñas del caballo?: ')
                     enfermo = input('¿El caballo está enfermo? (s/n) ')
                     if enfermo == 's':
                         enfermedad = input('¿Que enfermedad padece? ')
                         cura = input('¿Cual es la cura de la enfermedad? ')
-                        informe = nombre_final.inspeccion(comida, estado_pezuñas, enfermedad, cura)
+                        informe = nombre_final.inspeccion(comida, estado_pezunyas, enfermedad, cura)
                     else:
-                        informe = nombre_final.inspeccion(comida, estado_pezuñas)
+                        informe = nombre_final.inspeccion(comida, estado_pezunyas)
 
                 print()
                 print(informe)
@@ -232,7 +232,7 @@ def animales():
 
         elif seleccion == 4:  #Animal adoptado
             print('--- TRÁMITE DE ADOPCIÓN ---')
-            refugio_seleccionado = seleccionar_refugio()
+            refugio_seleccionado = seleccionar_refugio(mis_refugios)
 
             if len(refugio_seleccionado.animales) == 0:
                 print('No hay animales en este refugio.\n')
@@ -289,10 +289,10 @@ def refugios(mis_refugios):
         elif seleccion == 2:  # Añadir un refugio
             print('Vamos a añadir un nuevo refugio: ')
             nombre = input('Nombre del refugio: ').lower()
-            tamaño = pedir_entero('Espacio máximo del refugio: ')
+            tamanyo = pedir_entero('Espacio máximo del refugio: ')
             print()
 
-            mi_refugio = Refugio(nombre, tamaño)
+            mi_refugio = Refugio(nombre, tamanyo)
             mis_refugios.append(mi_refugio)
 
 
@@ -311,16 +311,16 @@ def pedir_dni():
         else:
             print("Error: El DNI debe tener 9 caracteres.")
 
-def añadir_empleado(): #Elección 2 en la función animales
+def anyadir_empleado(): #
     seleccion = pedir_entero('¿Cuál es su futura ocupación? ')
     while seleccion < 1 or seleccion > 2:  # Obliga a seleccionar bien
         print('Elija un valor válido')
         seleccion = int(input('Elija un apartado (1/2): '))
 
-    if seleccion == 1:  # Añadir perro
+    if seleccion == 1:  #Añadirlo como cuidador
         print('\n--- NUEVO CUIDADOR EN EL REFUGIO ---')
         print('Puedes añadir al nuevo trabajador en los siguientes refugios:')
-        refugio_seleccionado = seleccionar_refugio()
+        refugio_seleccionado = seleccionar_refugio(mis_refugios)
 
         print('Ahora introduzca los datos del empleado:')
         nombre = input('Nombre: ')
@@ -332,10 +332,10 @@ def añadir_empleado(): #Elección 2 en la función animales
         Cuidador(nombre, edad, genero, dni, refugio_seleccionado)
         print('Se ha introducido correctamente al cuidador/a en la base de datos\n')
 
-    elif seleccion == 2:
+    elif seleccion == 2: #Añadirlo como limpiador
         print('--- NUEVO LIMPIADOR EN EL REFUGIO ---\n')
         print('Puedes añadir el nuevo trabajador en los siguientes refugios:')
-        refugio_seleccionado = seleccionar_refugio()
+        refugio_seleccionado = seleccionar_refugio(mis_refugios)
 
         print('Ahora introduzca los datos del empleado:')
         nombre = input('Nombre: ')
@@ -349,13 +349,13 @@ def añadir_empleado(): #Elección 2 en la función animales
 
 
 
-def trabajadores():
+def trabajadores(mis_refugios):
     seguir = True
     while seguir:
         print('Bienvenido al apartado trabajadores, estas son las opciones:')
         print('1: Añadir un nuevo Trabajador')
         print('2: Buscar trabajadores por DNI')
-        print('3: Registro del trabajo de hoy')  # Clase abstracta
+        print('3: Registro del trabajo de hoy')
         print('4: Acciones administrativas')
         print('5: Volver al inicio')
 
@@ -371,12 +371,12 @@ def trabajadores():
             print('1: Cuidador')
             print('2: Limpiador')
 
-            añadir_empleado()
+            anyadir_empleado()
 
 
         elif seleccion == 2:  # Ver todos los empleados
             print('¿En que refugio se encuentra el empleado que buscas?: ')
-            refugio_seleccionado = seleccionar_refugio()
+            refugio_seleccionado = seleccionar_refugio(mis_refugios)
             if len(refugio_seleccionado.empleados) == 0:
                 print('No hay empleados en este refugio por el momento\n')
 
@@ -406,7 +406,7 @@ def trabajadores():
             print('Momento de ver cuanti tiempo hemos trabajado hoy')
             print('De que refugio?')
 
-            refugio_seleccionado = seleccionar_refugio()
+            refugio_seleccionado = seleccionar_refugio(mis_refugios)
 
             if len(refugio_seleccionado.empleados) == 0:
                 print('En este refugio no tiene animales por el momento\n')
@@ -441,7 +441,7 @@ def trabajadores():
             print('A continuación se le hará una serie de preguntas para saber cual proceso administrativo desea realizar')
             print('De que refugio forma parte?')
 
-            refugio_seleccionado = seleccionar_refugio()
+            refugio_seleccionado = seleccionar_refugio(mis_refugios)
 
             if len(refugio_seleccionado.empleados) == 0:
                 print('En este refugio no tiene animales por el momento\n')
@@ -477,7 +477,7 @@ def trabajadores():
         elif seleccion == 5:  #Volver para atrás
             seguir = False
 
-    return mis_refugios
+
 
 def buscar_usuario(dni, lista_usuarios):
     for i in lista_usuarios:
@@ -485,14 +485,16 @@ def buscar_usuario(dni, lista_usuarios):
             return i
     return None
 
-def clientes():
+
+
+def clientes(mis_refugios, lista_usuarios):
     seguir = True
     while seguir:
-        print('Bienvenido al apartado trabajadores, estas son las opciones:')
+        print('Bienvenido al apartado clientes, estas son las opciones:')
         print('1: Añadir un nuevo Usuario')
         print('2: Activar membresía por DNI')
         print('3: Registrarse como Voluntario')  
-        print('4: Registrar trabajo coluntario')
+        print('4: Registrar trabajo voluntario')
         print('5: Ajustes de Usuario')
         print('6: Volver al inicio')
 
@@ -529,7 +531,7 @@ def clientes():
                 nuevo_socio = Socio(cliente.nombre, cliente.dni, cliente.contacto, cliente.residencia, cliente.genero, cuota)
                 print(nuevo_socio.comprobar_socio())
                 # Reemplazamos en la lista
-                if nuevo_socio.comprobar_socio:
+                if nuevo_socio.comprobar_socio: #Aqui no debería ir nuevo_socio.membresia_activa?
                     lista_usuarios.remove(cliente)
                     lista_usuarios.append(nuevo_socio)
                 else:
@@ -543,7 +545,7 @@ def clientes():
             cliente = buscar_usuario(dni, lista_usuarios)
             if cliente:
                 edad = pedir_entero("Edad: ")
-                refugio_asig = seleccionar_refugio() 
+                refugio_asig = seleccionar_refugio(mis_refugios)
                 nuevo_vol = Voluntario(cliente.nombre, edad, cliente.genero, cliente.dni, cliente.contacto, cliente.residencia, refugio_asig)
                 lista_usuarios.remove(cliente)
                 lista_usuarios.append(nuevo_vol)
@@ -574,7 +576,7 @@ def clientes():
         elif seleccion == 6:
             seguir = False
     
-    return lista_usuarios, mis_refugios
+    return lista_usuarios
 
 
 
@@ -586,10 +588,10 @@ if __name__ == '__main__':
         lista_usuarios = []
         print('Bienvenido al sistema, primero introduzca los datos necesaríos')
         nombre = input('Nombre del refugio: ').lower()
-        tamaño = pedir_entero('Espacio máximo del refugio: ')
+        tamanyo = pedir_entero('Espacio máximo del refugio: ')
         print()
 
-        mi_refugio = Refugio(nombre, tamaño)
+        mi_refugio = Refugio(nombre, tamanyo)
         mis_refugios.append(mi_refugio)
 
         inicio = True
@@ -611,13 +613,13 @@ if __name__ == '__main__':
 
 
             if seleccion == 1:#Apartado animales
-                animales()
+                animales(mis_refugios)
 
             elif seleccion == 2: #Apartado Trabajadores
-                trabajadores()
+                trabajadores(mis_refugios)
 
             elif seleccion == 3: #Apartado Clientes
-                lista_usuarios = clientes()
+                lista_usuarios = clientes(mis_refugios, lista_usuarios)
 
             elif seleccion == 4: #Apartado Refugios
                 mis_refugios = refugios(mis_refugios)
