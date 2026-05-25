@@ -1,5 +1,5 @@
 class Refugio:
-    def __init__(self, nombre, tamanyo):
+    def __init__(self, nombre: str, tamanyo: int):
         self.nombre = nombre
         self.tamanyo = tamanyo #Capacidad del refugio
         self.animales = []
@@ -22,10 +22,10 @@ class Refugio:
         for empleado in self.empleados:
             print(empleado)
 
-    def adoptar(self, codigo, dni):
+    def adoptar(self, codigo: str, dni):
         for animal in self.animales:
             if animal.codigo == codigo:
                 self.animales.remove(animal)
-                return True
+                return animal
 
-        return False
+        return None

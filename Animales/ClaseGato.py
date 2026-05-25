@@ -1,13 +1,13 @@
 from Animales.ClaseAnimales import Animales
 
 class Gato(Animales):
-    def __init__(self, nombre, edad, raza, refugio = None):
+    def __init__(self, nombre: str, edad: int, raza: str, refugio = None):
 
         super().__init__(nombre, edad, 'gato', refugio)
         self.raza = raza
         self.patologia = []
 
-    def inspeccion(self, comida, estado_garras = None, enfermedad = None, cura = None):
+    def inspeccion(self, comida: str, estado_garras: str = None, enfermedad: str = None, cura: str = None):
         self.comida = comida
 
         if estado_garras:

@@ -1,13 +1,13 @@
 from Animales.ClaseAnimales import Animales
 
 class Caballo(Animales):
-    def __init__(self, nombre, edad, raza, refugio = None):
+    def __init__(self, nombre: str, edad: int, raza: str, refugio = None):
 
         super().__init__(nombre, edad, 'caballo', refugio)
         self.raza = raza
         self.patologia = []
 
-    def inspeccion(self, comida, estado_pezunyas = None, enfermedad = None, cura = None):
+    def inspeccion(self, comida: str, estado_pezunyas: str = None, enfermedad: str = None, cura: str = None):
         self.comida = comida
 
         if estado_pezunyas:

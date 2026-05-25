@@ -1,7 +1,7 @@
 from Personas.ClaseUsuario import Usuario
 
 class Socio(Usuario):
-    def __init__(self, nombre, dni, contacto, residencia, genero, cuota):
+    def __init__(self, nombre: str, dni: str, contacto: int, residencia: str, genero: str, cuota: int):
         super().__init__(nombre, dni, contacto, residencia, genero)
 
         self.cuota_mensual = cuota
@@ -23,8 +23,8 @@ class Socio(Usuario):
         else:
             return f"Error: {self.nombre} no tiene una membresía activa para generar certificados."
 
-    def pagar_cuota(self, dinero):
-        cueta += dinero
+    def pagar_cuota(self, dinero: int):
+        self.cuota_mensual += dinero
 
     def __bool__(self): #definimos el metodo __bool__
         self.comprobar_socio()

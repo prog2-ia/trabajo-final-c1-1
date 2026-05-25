@@ -1,12 +1,12 @@
 from Personas.ClaseEmpleado import Empleado
 
 class Cuidador(Empleado):
-    def __init__(self, nombre, edad, genero, dni, refugio=None):
+    def __init__(self, nombre: str, edad: int, genero: str, dni: str, refugio=None):
         super().__init__(nombre, edad, genero, dni, 'Cuidador', refugio)
         self.seguimiento_animales = {}  # Diccionario: {animal: horas}
         self.lista_experto = []
 
-    def trabajar(self, animal, horas):
+    def trabajar(self, animal, horas: int):
         self.HorasTrabajadas(horas)
 
         if animal not in self.seguimiento_animales:

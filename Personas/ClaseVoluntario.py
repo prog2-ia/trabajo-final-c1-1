@@ -4,7 +4,7 @@ from Personas.ClaseEmpleado import Empleado
 
 class Voluntario(Usuario, Empleado):
     #el tiempo se queda por defecto en 0, si el usuario quiere especificar el tiempo, basta con que lo especifíque
-    def __init__(self, nombre, edad, genero, dni, contacto, residencia, tiempo=0, refugio=None):
+    def __init__(self, nombre: str, edad: int, genero: str, dni: str, contacto: int, residencia: str, tiempo: int | 0, refugio=None):
         Usuario.__init__(self, nombre, dni, contacto, residencia, genero)
         Empleado.__init__(self, nombre, edad, genero, dni, tiempo, refugio)
 
@@ -12,7 +12,7 @@ class Voluntario(Usuario, Empleado):
         self.misiones_completadas = 0
 
     #lo mismo que con el tiempo, pero con ayuda
-    def trabajar(self, horas, tarea="ayuda general"):
+    def trabajar(self, horas: int, tarea="ayuda general"):
         self.HorasTrabajadas(horas)
         puntos_ganados = horas // 10
         #usamos la sobrecarga del operador +=

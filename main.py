@@ -275,10 +275,11 @@ def animales(mis_refugios, lista_usuarios):
                 refugio_seleccionado.mostrar_animales()
                 codigo = input('Introduce el código del animal a adoptar: ')
 
-                exito = refugio_seleccionado.adoptar(codigo, cliente.dni)
+                animal_adoptado = refugio_seleccionado.adoptar(codigo, cliente.dni)
 
-                if exito:
-                    print(f'¡Felicidades! el animal con código {codigo} ha sido adoptado por {cliente.nombre} con DNI: {cliente.dni}.\n ')
+                if animal_adoptado:
+                    mensaje_exito = cliente.registrar_adopcion(animal_adoptado)
+                    print(mensaje_exito)
                     carpeta_historial = 'Historial'
 
                     if not os.path.exists(carpeta_historial):
@@ -520,7 +521,7 @@ def trabajadores(mis_refugios):
                         print('El empleado seleccionado no está en el refugio elegido')
 
                 if nombre_final.oficio == 'Cuidador':
-                    print('Agradecemos mucho su trabajo voluntario')
+                    print('Agradecemos mucho su trabajo')
                     print('Sin embargo no hay ningún proceso administrativo del cual puedas hacer uso')
 
                 elif nombre_final.oficio == 'Limpiador':
@@ -605,7 +606,7 @@ def clientes(mis_refugios, lista_usuarios):
                 refugio_asig = seleccionar_refugio(mis_refugios)
                 if refugio_asig == None:
                     return
-                nuevo_vol = Voluntario(cliente.nombre, edad, cliente.genero, cliente.dni, cliente.contacto, cliente.residencia, refugio_asig)
+                nuevo_vol = Voluntario(cliente.nombre, edad, cliente.genero, cliente.dni, cliente.contacto, cliente.residencia, 0, refugio_asig)
                 lista_usuarios.remove(cliente)
                 lista_usuarios.append(nuevo_vol)
                 refugio_asig.anyadir_empleado(nuevo_vol)

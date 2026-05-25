@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 class Animales(ABC):
     total_animales = 0 #Lista para saber la cantidad de animales que llevamos creados
 
-    def __init__(self, nombre, edad, especie, refugio = None):
+    def __init__(self, nombre: str, edad: int, especie: str, refugio = None):
         Animales.total_animales += 1
 
         self.nombre = nombre
@@ -31,7 +31,7 @@ class Animales(ABC):
     def __str__(self): #En caso de que alguien haga print(Nombre_Perro)
         return f'Código: {self.codigo}. Nombre: {self.nombre}. Especie: {self.especie}'
 
-    def __iadd__(self, nueva_necesidad): #Permite hacer: animal += necesidad
+    def __iadd__(self, nueva_necesidad: str): #Permite hacer: animal += necesidad
         self.necesidades.append(nueva_necesidad)
         return self
 
@@ -39,9 +39,9 @@ class Animales(ABC):
     def mostrar_censo(cls):
         return f'Total histórico de animales registrados: {cls.total_animales}'
 
-    def anyadir_tiempo(self, tiempo):
+    def anyadir_tiempo(self, tiempo: int):
         self.tiempo += tiempo
 
     @abstractmethod
-    def inspeccion(self, comida):
+    def inspeccion(self, comida: str):
         pass

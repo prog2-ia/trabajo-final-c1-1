@@ -3,7 +3,7 @@ from xmlrpc.client import escape
 
 
 class Empleado(ABC):
-    def __init__(self, nombre, edad, genero, dni, oficio, refugio = None):
+    def __init__(self, nombre: str, edad: int, genero: str, dni: str, oficio: str, refugio = None):
         self.oficio = oficio
         self.nombre = nombre
         self.edad = edad
@@ -19,7 +19,7 @@ class Empleado(ABC):
         return self.__dni
 
     @dni.setter
-    def dni(self, nuevo_dni):
+    def dni(self, nuevo_dni: str):
         if len(str(nuevo_dni)) == 9:
             self.__dni = nuevo_dni
         else:
@@ -29,7 +29,7 @@ class Empleado(ABC):
     def trabajar(self):
         pass
 
-    def HorasTrabajadas(self, horas):
+    def HorasTrabajadas(self, horas: int):
         self.tiempo += horas
         return f"{self.nombre} ha registrado {horas} horas nuevas. Total: {self.tiempo}"
 

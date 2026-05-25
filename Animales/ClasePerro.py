@@ -1,7 +1,7 @@
 from Animales.ClaseAnimales import Animales
 
 class Perro(Animales):
-    def __init__(self, nombre, edad, raza, refugio = None):
+    def __init__(self, nombre: str, edad: int, raza: str, refugio = None):
 
         super().__init__(nombre, edad, 'perro', refugio)
         self.raza = raza
@@ -10,7 +10,7 @@ class Perro(Animales):
     def caracteristicas(self, caract):
         print(f'Este perro de la raza {self.raza} tiene estas características: {caract}')
 
-    def inspeccion(self, comida, estado_dientes=None, enfermedad=None, cura=None):
+    def inspeccion(self, comida: str, estado_dientes: str = None, enfermedad: str = None, cura: str = None):
         self.comida = comida
 
         if estado_dientes:
