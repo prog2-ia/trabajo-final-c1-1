@@ -275,7 +275,7 @@ def animales(mis_refugios, lista_usuarios):
                 refugio_seleccionado.mostrar_animales()
                 codigo = input('Introduce el código del animal a adoptar: ')
 
-                animal_adoptado = refugio_seleccionado.adoptar(codigo, cliente.dni)
+                animal_adoptado = refugio_seleccionado.adoptar(codigo)
 
                 if animal_adoptado:
                     mensaje_exito = cliente.registrar_adopcion(animal_adoptado)
@@ -681,8 +681,8 @@ if __name__ == '__main__':
     mis_refugios, lista_usuarios = cargar_datos()
 
     if len(mis_refugios) == 0:
-        mis_refugios = []
-        lista_usuarios = []
+        mis_refugios: list = []
+        lista_usuarios: list = []
         print('Bienvenido al sistema, primero introduzca los datos necesaríos')
         nombre = input('Nombre del refugio: ').lower()
         tamanyo = pedir_entero('Espacio máximo del refugio: ')

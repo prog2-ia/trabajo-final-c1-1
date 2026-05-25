@@ -1,11 +1,12 @@
 from Animales.ClaseAnimales import Animales
+from Refugio.ClaseRefugio import Refugio
 
 class Gato(Animales):
-    def __init__(self, nombre: str, edad: int, raza: str, refugio = None):
+    def __init__(self, nombre: str, edad: int, raza: str, refugio: Refugio = None):
 
         super().__init__(nombre, edad, 'gato', refugio)
         self.raza = raza
-        self.patologia = []
+        self.patologia: list = []
 
     def inspeccion(self, comida: str, estado_garras: str = None, enfermedad: str = None, cura: str = None):
         self.comida = comida

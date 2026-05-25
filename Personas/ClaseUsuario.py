@@ -1,12 +1,14 @@
+from typing import Self
+
 class Usuario:
     def __init__(self, nombre: str, dni: str, contacto: int, residencia: str, genero: str):
         self.nombre = nombre
         self.dni = dni
         self.contacto = contacto
         self.residencia = residencia
-        self.animales_adoptados = []
+        self.animales_adoptados: list = []
         self.genero = genero
-        self.puntos_lealtad = 0 #son puntos que se acumulan para un sistema de beneficios y de la posibilidad de adopción
+        self.puntos_lealtad: int = 0 #son puntos que se acumulan para un sistema de beneficios y de la posibilidad de adopción
     def registrar_adopcion(self, animal: str):
         if animal not in self.animales_adoptados:
             self.animales_adoptados.append(animal)
@@ -23,14 +25,14 @@ class Usuario:
             else:
                 return f"{nuevo_contacto} es el contacto que tiene actualmente don {self.nombre}"
 
-    def __iadd__(self, cantidad: int):
+    def __iadd__(self, cantidad: int) -> Self:
         self.puntos_lealtad += cantidad
         return self
 
     def __str__(self):
         return f"Usuario: {self.nombre}"
 
-    def __eq__(self, otro):
+    def __eq__(self, otro: object):
         if not isinstance(otro, Usuario):
             return False
 

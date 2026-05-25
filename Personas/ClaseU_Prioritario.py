@@ -5,8 +5,8 @@ class Socio(Usuario):
         super().__init__(nombre, dni, contacto, residencia, genero)
 
         self.cuota_mensual = cuota
-        self.historial_adopciones = []
-        self.membresia_activa = False
+        self.historial_adopciones: list = []
+        self.membresia_activa: bool = False
 
     def comprobar_socio(self):
         if self.cuota_mensual < 20:

@@ -1,11 +1,12 @@
 from Animales.ClaseAnimales import Animales
+from Refugio.ClaseRefugio import Refugio
 
 class Perro(Animales):
-    def __init__(self, nombre: str, edad: int, raza: str, refugio = None):
+    def __init__(self, nombre: str, edad: int, raza: str, refugio: Refugio = None):
 
         super().__init__(nombre, edad, 'perro', refugio)
         self.raza = raza
-        self.patologia = []
+        self.patologia: list = []
 
     def caracteristicas(self, caract):
         print(f'Este perro de la raza {self.raza} tiene estas características: {caract}')

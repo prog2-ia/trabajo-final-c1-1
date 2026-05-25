@@ -1,10 +1,11 @@
 from Personas.ClaseEmpleado import Empleado
+from Refugio.ClaseRefugio import Refugio
 
 class Cuidador(Empleado):
-    def __init__(self, nombre: str, edad: int, genero: str, dni: str, refugio=None):
+    def __init__(self, nombre: str, edad: int, genero: str, dni: str, refugio: Refugio=None):
         super().__init__(nombre, edad, genero, dni, 'Cuidador', refugio)
-        self.seguimiento_animales = {}  # Diccionario: {animal: horas}
-        self.lista_experto = []
+        self.seguimiento_animales: dict = {}  # Diccionario: {animal: horas}
+        self.lista_experto: list = []
 
     def trabajar(self, animal, horas: int):
         self.HorasTrabajadas(horas)

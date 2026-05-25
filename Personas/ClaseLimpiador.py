@@ -1,10 +1,11 @@
 from Personas.ClaseEmpleado import Empleado
+from Refugio.ClaseRefugio import Refugio
 
 class Limpiador(Empleado):
-    def __init__(self, nombre: str, edad: int, genero: str, dni: str, salario: int, refugio=None):
+    def __init__(self, nombre: str, edad: int, genero: str, dni: str, salario: int, refugio: Refugio=None):
         super().__init__(nombre, edad, genero, dni, 'Limpiador', refugio)
         self.salario = salario
-        self.tiempo = 0
+        self.tiempo: int = 0
 
     def trabajar(self, horas: int):
         self.tiempo += horas

@@ -1,18 +1,20 @@
 from abc import ABC, abstractmethod
+from Refugio.ClaseRefugio import Refugio
+from typing import Self
 
 class Animales(ABC):
     total_animales = 0 #Lista para saber la cantidad de animales que llevamos creados
 
-    def __init__(self, nombre: str, edad: int, especie: str, refugio = None):
+    def __init__(self, nombre: str, edad: int, especie: str, refugio: Refugio = None):
         Animales.total_animales += 1
 
         self.nombre = nombre
         self.edad = edad
         self.especie = especie
-        self.necesidades = [] #Para cuando pase la inspección del veterinario
-        self.comida = None
-        self.tiempo = 0
-        self.informe = 'No hay informe generado hasta que se realice la inspección'
+        self.necesidades: list = [] #Para cuando pase la inspección del veterinario
+        self.comida: str = None
+        self.tiempo: int = 0
+        self.informe: str = 'No hay informe generado hasta que se realice la inspección'
 
         if especie == 'gato':
             letra = 'G'
@@ -31,7 +33,7 @@ class Animales(ABC):
     def __str__(self): #En caso de que alguien haga print(Nombre_Perro)
         return f'Código: {self.codigo}. Nombre: {self.nombre}. Especie: {self.especie}'
 
-    def __iadd__(self, nueva_necesidad: str): #Permite hacer: animal += necesidad
+    def __iadd__(self, nueva_necesidad: str) -> Self: #Permite hacer: animal += necesidad
         self.necesidades.append(nueva_necesidad)
         return self
 
@@ -45,3 +47,4 @@ class Animales(ABC):
     @abstractmethod
     def inspeccion(self, comida: str):
         pass
+    

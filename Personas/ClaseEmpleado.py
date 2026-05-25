@@ -1,9 +1,10 @@
 from abc import ABC, abstractmethod
 from xmlrpc.client import escape
+from Refugio.ClaseRefugio import Refugio
 
 
 class Empleado(ABC):
-    def __init__(self, nombre: str, edad: int, genero: str, dni: str, oficio: str, refugio = None):
+    def __init__(self, nombre: str, edad: int, genero: str, dni: str, oficio: str, refugio: Refugio = None):
         self.oficio = oficio
         self.nombre = nombre
         self.edad = edad
