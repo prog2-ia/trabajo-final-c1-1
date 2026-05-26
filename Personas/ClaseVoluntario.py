@@ -1,6 +1,6 @@
 from Personas.ClaseUsuario import Usuario
 from Personas.ClaseEmpleado import Empleado
-from Refugio.ClaseRefugio import Refugio
+from ClaseRefugio import Refugio
 
 
 class Voluntario(Usuario, Empleado):

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from xmlrpc.client import escape
-from Refugio.ClaseRefugio import Refugio
+from ClaseRefugio import Refugio
 
 
 class Empleado(ABC):

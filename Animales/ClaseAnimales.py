@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from Refugio.ClaseRefugio import Refugio
+from ClaseRefugio import Refugio
 from typing import Self
 
 class Animales(ABC):

@@ -1,5 +1,5 @@
 from Personas.ClaseEmpleado import Empleado
-from Refugio.ClaseRefugio import Refugio
+from ClaseRefugio import Refugio
 
 class Cuidador(Empleado):
     def __init__(self, nombre: str, edad: int, genero: str, dni: str, refugio: Refugio=None):

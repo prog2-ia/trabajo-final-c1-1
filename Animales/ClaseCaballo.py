@@ -1,5 +1,5 @@
 from Animales.ClaseAnimales import Animales
-from Refugio.ClaseRefugio import Refugio
+from ClaseRefugio import Refugio
 
 class Caballo(Animales):
     def __init__(self, nombre: str, edad: int, raza: str, refugio: Refugio = None):
